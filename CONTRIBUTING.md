@@ -1,3 +1,16 @@
+# Flyvec with Conda
+Get started developing FlyVec with the included conda environment
+
+
+## Development
+```
+conda env create -f environment-dev.yml
+conda activate flyvec
+nbdev_install_git_hooks
+pip install -e .
+nbdev_build_lib
+```
+
 # How to contribute
 
 ## How to get started
@@ -30,4 +43,3 @@ nbdev_install_git_hooks
 ## Do you want to contribute to the documentation?
 
 * Docs are automatically created from the notebooks in the nbs folder.
-
