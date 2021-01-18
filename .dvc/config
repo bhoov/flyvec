@@ -1,0 +1,8 @@
+[core]
+    remote = ibmremote
+['remote "ibmremote"']
+    url = s3://hoo-flyvec
+    endpointurl = https://s3.ap.cloud-object-storage.appdomain.cloud
+    access_key_id = 07598db5c9364ad29002fe8e22daddd3
+    secret_access_key = a7bec64c8840439576380beb238b161117f2aeb3e7f993f0
+    region = ap-geo

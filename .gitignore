@@ -1,5 +1,7 @@
 # Project choices
 _archive
+_secrets
+data
 
 # Temp files
 *.bak
