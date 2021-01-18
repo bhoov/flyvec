@@ -7,24 +7,15 @@ entries:
 - folders:
   - folderitems:
     - output: web,pdf
-      title: Export to modules
-      url: /export
+      title: Overview
+      url: /
     - output: web,pdf
-      title: Convert to html
-      url: /export2html
+      title: FlyVec
+      url: core.html
     - output: web,pdf
-      title: Show doc
-      url: /showdoc
-    - output: web,pdf
-      title: Test functions
-      url: /test
-    - output: web,pdf
-      title: Core functions
-      url: /core
-    - output: web,pdf
-      title: Command line functions
-      url: /cli
+      title: Tokenizer
+      url: Tokenizer.html
     output: web
-    title: Notebook
+    title: flyvec
   output: web
   title: Sidebar
