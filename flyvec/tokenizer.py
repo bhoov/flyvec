@@ -11,6 +11,7 @@ from gensim.models.phrases import Phrases, Phraser
 import os
 import regex as re
 import string
+from functools import cached_property
 import numpy as np
 from typing import *
 from fastcore.test import *
@@ -94,7 +95,7 @@ class GensimTokenizer:
         if phraser_fname is not None:
             p = Phraser.load(phraser_fname)
         else:
-            print("WARNING: No phraser specified. Proceeding without phrases")
+            print("No phraser specified. Proceeding without phrases")
             p = Phraser(Phrases([[]]))
 
         return cls(d, p)
@@ -172,7 +173,11 @@ class GensimTokenizer:
         self.dictionary.save(outfile)
 
     def n_vocab(self):
-        return len(self.dictionary.keys())
+        return len(self.vocab)
+
+    @cached_property
+    def vocab(self):
+        return self.dictionary.keys()
 
     def __len__(self):
         return self.n_vocab()

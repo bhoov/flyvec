@@ -10,6 +10,7 @@ from .tokenizer import GensimTokenizer
 from pathlib import Path
 from functools import cached_property, lru_cache
 from typing import *
+from fastcore.test import *
 
 # Cell
 def softmax(x: np.array, beta=1.0):
@@ -63,7 +64,7 @@ class FlyVec:
         return cls(synapse_file, tokenizer_file, stopword_file=stopword_file, phrases_file=phrases_file, normalize_synapses=normalize_synapses)
 
     @cached_property
-    def n_heads(self): return self.synapses.shape
+    def n_neurons(self): return self.synapses.shape[0]
 
     @cached_property
     def synapses(self):
@@ -86,186 +87,76 @@ class FlyVec:
         return set(np.load(self.stopword_file))
 
     @cached_property
+    def vocab(self):
+        return set(self.tokenizer.vocab)
+
+    @cached_property
     def n_vocab(self): return self.tokenizer.n_vocab()
 
-    def make_sentence_vector(self, token_ids: Iterable[int], targ_idx=None, targ_coef=1, targ_coef_is_n_context=False, normalize_vector=True, return_n_context=False, ignore_unknown=True):
-        """Create the input for the synapses given the token ids
+    @cached_property
+    def unknown_embedding_info(self):
+        return {
+            "token": "<UNK>",
+            "tok_id": 0,
+            "embedding": np.zeros(self.n_neurons).astype(np.uint8)
+        }
+
+    def is_unknown_token(self, token:str):
+        """Check if a token is unknown (return false) or bad (raise ValueError)"""
+        if len(token) == 0:
+            raise ValueError("Token cannot be the empty string")
+
+        tok = self.tokenizer.tokenize(token)[0]
+        tok_id = self.tokenizer.token2id(tok)
+        return tok_id == 0
+
+    def get_sparse_embedding(self, word: str, hash_length: int=32):
+        """Get a context-independent word embedding for a given word.
+        If, when tokenized, the word is composed of multiple tokens, return the embedding of the first.
 
         Args:
-            token_ids: Tokenized input
-            targ_idx: Which index to treat as the target index. Must be [0, len(token_ids))
-            targ_coef: Force the target index to have this value
-            targ_coef_is_n_context: Set target value to number of context. If true, overrides targ_coef.
-            normalize_vector: If provided, normalize each element by the total number of tokens
-            return_n_context: Get information about the number of context tokens
-            ignore_unknown: If the token is not in the vocabulary, do not add it to the sentence vector as "unknown"
+            token: A token (in the vocabulary) to get the word-embedding of
+            hash_length: The number of non-zero entries in the sparse embedding
+            normalize_first: If true, preprocess the token to be lowercase, no punctuation, etc.
 
         Returns:
-            Sentence vector (np.array of shape (N_vocab,))
+            `np.ndarray` of shape (self.n_neurons,) and dtype np.int8
         """
-        H, N = self.synapses.shape
-        sentence = np.zeros((N,), dtype=np.int8)
-        vocab = self.tokenizer.dictionary.keys()
+        if self.is_unknown_token(word): return self.unknown_embedding_info
 
-        def valid_token(t):
-            is_unknown = ignore_unknown and t != self.tokenizer.patch_dict["<UNK>"]
-            return t in vocab and t not in self.stop_words and is_unknown
-
-        # Assign context
-        n_context = 0
-        for i, t in enumerate(token_ids):
-            if i != targ_idx:
-                if valid_token(t):
-                    n_context += 1
-                    sentence[t] += 1
-
-        # Assign target
-        if targ_coef_is_n_context:
-            target_value = n_context
-        else:
-            target_value = targ_coef
-
-        if targ_idx is not None:
-            target = token_ids[targ_idx]
-            if target not in self.stop_words:
-                sentence[self.n_vocab + target] = target_value
-
-        if normalize_vector:
-            divisor = np.sqrt(np.sum(sentence * sentence))
-            if divisor > 0:
-                sentence = sentence / divisor # Could be optimized as vector is very sparse
-
-        if return_n_context:
-            out = (sentence, n_context)
-        else:
-            out = sentence
-
-        return out
-
-    def phrase2sentence_vector(self, phrase: str, normalize_vector=True, ignore_unknown=True):
-        """Encode a sentence, then create a context only vector out of a phrase"""
-        ids = self.tokenizer.encode(phrase)
-        return self.make_sentence_vector(ids, normalize_vector=normalize_vector, ignore_unknown=ignore_unknown)
-
-    def get_hash_from_token_ids(self, token_ids: List[int], idx: Union[int, None], hash_length: int):
-        """Get hashcode from a set of encoded tokens, selecting the index to use as the target word
-
-        Args:
-            token_ids: Encoded tokens of length N
-            idx: Target index to create a hash code for. If None, create a hash of the whole N-Gram.
-            hash_length: Number of non-zero units in the hash code. Alternatively, number of neurons to accept for hashing
-
-        Returns:
-            {
-                hash: Desired hash code
-                activated_neurons: Which neurons fired
-                activations:
-                context_attentions: Synapse weights for each fired neuron for the context words
-                target_attentions: Synapse weights for each fired neuron for the target word
-            }
-        """
-        H, N = self.synapses.shape
-
-        sentence, n_context = self.make_sentence_vector(token_ids, idx, return_n_context=True)
-
-        act = np.dot(self.synapses, sentence)
+        dense_info = self.get_dense_embedding(word)
+        act = dense_info['embedding']
         i_sorted = np.argsort(-act)
         act_sort = act[i_sorted]
         thr = (act_sort[hash_length - 1] + act_sort[hash_length]) / 2.0
-        binary = act > thr
-
-        # Extract attentions
-        activated_neurons = i_sorted[:hash_length]
-        context_ids = token_ids.copy()
-        context_attentions = self.synapses[activated_neurons][:, context_ids].copy()
-
-        if idx is not None:
-            target_id = token_ids[idx]
-            target_attentions = self.synapses[activated_neurons][:, self.n_vocab + target_id]
-            context_attentions[:, idx] = n_context * target_attentions
-        else:
-            target_id = None
-            target_attentions = None
-
+        binary = (act > thr).astype(np.int8)
         return {
-            "hash": binary.flatten().astype(np.int8),# , attentions
-            "activated_neurons": activated_neurons,
-            "activations": act,
-            "context_attentions": context_attentions,
-            "target_attentions": target_attentions,
+            "token": dense_info['token'],
+            "id": dense_info['id'],
+            "embedding": binary
         }
 
-    def get_hash_from_tokens(self, tokens, targ_token, hash_length):
-        """Get hash from tokens"""
-        token_ids = self.tokenizer.tokens2ids(tokens)
-        targ = self.tokenizer.token2id(targ_token)
-
-        try:
-            idx = token_ids.index(targ)
-        except ValueError as e:
-            raise ValueError(f"Specified target token '{targ_token}' not found in '{tokens}'")
-
-        return self.get_hash_from_token_ids(token_ids, idx, hash_length)
-
-    def get_hash_from_string(self, string, targ_word, hash_length):
-        """Hash the target word from the string
-
-        Examples:
-            >>> string1 = 'money in bank checking account'
-            >>> out = project.get_hash_from_string(string1, "bank", 32)
-        """
-        tokens = self.tokenizer.encode(string)
-        targ = self.tokenizer.encode(targ_word)[0]
-
-        try:
-            idx = tokens.index(targ)
-        except ValueError as e:
-            raise ValueError(f"Specified target word '{targ_word}' not found in '{self.tokenizer.decode(tokens)}'")
-
-        return self.get_hash_from_token_ids(tokens, idx, hash_length)
-
-    def get_k_neighbors(self, query: np.ndarray, k: int, hash_length: int) -> np.ndarray:
-        """Get k nearest context independent codes from query
+    def get_dense_embedding(self, word: str):
+        """Get a context-independent word embedding for a given token
 
         Args:
-            query: Hash code to compare to all other hashes
-            k: Desired number of nearest neighbors
-            hash_length: Desired to compare the query against
+            token: A token (in the vocabulary) to get the word-embedding of
+            hash_length: The number of non-zero entries in the sparse embedding
 
         Returns:
-
+            `np.ndarray` of shape (self.n_neurons,) and dtype np.float64
         """
-        embed = self.get_embeddings(hash_length)
-        orig_vocabulary = np.dot(query, embed)
-        ind_sort = np.argsort(-orig_vocabulary)
-        return self.tokenizer.ids2tokens(ind_sort[:k])
+        if self.is_unknown_token(word): return self.unknown_embedding_info
 
-    def get_mem_concepts(self, h: int, n_show: int=20, beta: float=800.0):
-        """Retrieve a ranked list of `n` concepts that head `h` learns, weighting them according to inverse temperature `beta`
+        token = self.tokenizer.tokenize(word)[0]
+        tok_id = self.tokenizer.token2id(token)
+        activation_scores = self.synapses[:, self.n_vocab + tok_id] # Target word embedding is stored in second compartment of matrix
 
-        Right now, only supports target compartment retrievals
-        """
-        # context = softmax(self.synapses[h][:self.n_vocab], beta)
-        target = softmax(self.synapses[h][self.n_vocab:], beta)
-        return [
-            {
-            "token": self.tokenizer.id2token(ID),
-            "contribution": float(target[ID])
-            } for ID in np.argsort(-target)[:n_show]]
-
-    @lru_cache(maxsize=8)
-    def get_embeddings(self, hash_length: int):
-        """Convert all the synapse weights into context independent embeddings. Useful for finding nearest neighbors
-
-        Args:
-            hash_length: Length of desired hash code
-
-        """
-        targets = self.synapses[:, self.n_vocab :]
-        act_sort = -np.sort(-targets, axis=0)
-        thr = (act_sort[hash_length - 1, :] + act_sort[hash_length, :]) / 2.0
-        binary = (targets > thr).astype(np.int8)
-        return binary
+        return {
+            "token": token,
+            "id": tok_id,
+            "embedding": activation_scores
+        }
 
 # Cell
 @lru_cache

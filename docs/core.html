@@ -53,7 +53,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="softmax" class="doc_header"><code>softmax</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>softmax</code>(<strong><code>x</code></strong>:<code>array</code>, <strong><code>beta</code></strong>=<em><code>1.0</code></em>)</p>
+<h4 id="softmax" class="doc_header"><code>softmax</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>softmax</code>(<strong><code>x</code></strong>:<code>array</code>, <strong><code>beta</code></strong>=<em><code>1.0</code></em>)</p>
 </blockquote>
 <p>Take the softmax of 1-D vector <code>x</code> according to inverse temperature <code>beta</code>. Returns a vector of the same length as x</p>
 
@@ -77,40 +77,6 @@ nb_path: "nbs/00_core.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">softmax</span><span class="p">(</span><span class="n">_x</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>array([0.10650698, 0.78698604, 0.10650698])</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -119,7 +85,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="normalize_synapses" class="doc_header"><code>normalize_synapses</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>normalize_synapses</code>(<strong><code>syn</code></strong>:<code>array</code>, <strong><code>prec</code></strong>=<em><code>1e-32</code></em>, <strong><code>p</code></strong>=<em><code>2</code></em>)</p>
+<h4 id="normalize_synapses" class="doc_header"><code>normalize_synapses</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>normalize_synapses</code>(<strong><code>syn</code></strong>:<code>array</code>, <strong><code>prec</code></strong>=<em><code>1e-32</code></em>, <strong><code>p</code></strong>=<em><code>2</code></em>)</p>
 </blockquote>
 <p>Normalize the synapses</p>
 <p>Args:
@@ -157,7 +123,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FlyVec" class="doc_header"><code>class</code> <code>FlyVec</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L37" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FlyVec</code>(<strong><code>synapse_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>], <strong><code>tokenizer_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>], <strong><code>stopword_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>phrases_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>normalize_synapses</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
+<h2 id="FlyVec" class="doc_header"><code>class</code> <code>FlyVec</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L38" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FlyVec</code>(<strong><code>synapse_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>], <strong><code>tokenizer_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>], <strong><code>stopword_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>phrases_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>normalize_synapses</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>A class wrapper around a tokenizer, stop words, and synapse weights for hashing words</p>
 
@@ -188,6 +154,125 @@ nb_path: "nbs/00_core.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">FlyVec</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="s2">&quot;../data/model_config.yaml&quot;</span><span class="p">)</span>
+<span class="n">hsh</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_sparse_embedding</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span> <span class="n">hsh</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Loading Tokenizer...
+No phraser specified. Proceeding without phrases
+Loading synapses...
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;token&#39;: &#39;hello&#39;,
+ &#39;id&#39;: 5483,
+ &#39;embedding&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0,
+        0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0,
+        0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+        0, 0, 0, 1], dtype=int8)}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>hsh['embedding']</code> is non-zero for the top <code>hash_length</code> most activated neurons in our model</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you provide multiple words in the input string, <a href="/flyvec/core.html#FlyVec"><code>FlyVec</code></a> will provided the word vector for the first word</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hsh2</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_sparse_embedding</span><span class="p">(</span><span class="s2">&quot;hello world&quot;</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">hsh2</span><span class="p">[</span><span class="s1">&#39;embedding&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">hsh</span><span class="p">[</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">_f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">get_sparse_embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">_f</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)[</span><span class="s1">&#39;token&#39;</span><span class="p">],</span> <span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">_f</span><span class="p">(</span><span class="s2">&quot;BOXNAFS&quot;</span><span class="p">)[</span><span class="s1">&#39;embedding&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">),</span> <span class="s2">&quot;Expected unknown embedding to be all zero&quot;</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">_f</span><span class="p">(</span><span class="s2">&quot;HELLO&quot;</span><span class="p">)[</span><span class="s1">&#39;embedding&#39;</span><span class="p">],</span> <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)[</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">_f</span><span class="p">(</span><span class="s2">&quot;not a single token&quot;</span><span class="p">)[</span><span class="s1">&#39;embedding&#39;</span><span class="p">],</span> <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;not&quot;</span><span class="p">)[</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span>
+<span class="n">test_fail</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">contains</span><span class="o">=</span><span class="s2">&quot;empty string&quot;</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">_f</span><span class="p">(</span><span class="s2">&quot;NotARealWord&quot;</span><span class="p">)[</span><span class="s1">&#39;embedding&#39;</span><span class="p">],</span> <span class="n">_f</span><span class="p">(</span><span class="s2">&quot;&lt;UNK&gt;&quot;</span><span class="p">)[</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
 <div class="output">
@@ -196,7 +281,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="initialize_flyvec" class="doc_header"><code>initialize_flyvec</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L271" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>initialize_flyvec</code>(<strong><code>fname</code></strong>)</p>
+<h4 id="initialize_flyvec" class="doc_header"><code>initialize_flyvec</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L162" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>initialize_flyvec</code>(<strong><code>fname</code></strong>)</p>
 </blockquote>
 
 </div>
