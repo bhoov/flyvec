@@ -101,6 +101,9 @@ class FlyVec:
             "embedding": np.zeros(self.n_neurons).astype(np.uint8)
         }
 
+    def tokenize(self, sentence:str):
+        return self.tokenizer.tokenize(sentence)
+
     def is_unknown_token(self, token:str):
         """Check if a token is unknown (return false) or bad (raise ValueError)"""
         if len(token) == 0:
