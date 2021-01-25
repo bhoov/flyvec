@@ -1,0 +1,4 @@
+synapses: ../data/synapses/OWT_hid_400_W_11_LR_0.0002_14.npy
+tokenizer: ../data/tokenizer/gensim1_patched.dict
+stop_words: ../data/tokenizer/exceptional_ids_terrier_stop.npy
+normalize_synapses: True
