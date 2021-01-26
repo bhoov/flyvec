@@ -53,7 +53,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="softmax" class="doc_header"><code>softmax</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>softmax</code>(<strong><code>x</code></strong>:<code>array</code>, <strong><code>beta</code></strong>=<em><code>1.0</code></em>)</p>
+<h4 id="softmax" class="doc_header"><code>softmax</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L18" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>softmax</code>(<strong><code>x</code></strong>:<code>array</code>, <strong><code>beta</code></strong>=<em><code>1.0</code></em>)</p>
 </blockquote>
 <p>Take the softmax of 1-D vector <code>x</code> according to inverse temperature <code>beta</code>. Returns a vector of the same length as x</p>
 
@@ -85,7 +85,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="normalize_synapses" class="doc_header"><code>normalize_synapses</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>normalize_synapses</code>(<strong><code>syn</code></strong>:<code>array</code>, <strong><code>prec</code></strong>=<em><code>1e-32</code></em>, <strong><code>p</code></strong>=<em><code>2</code></em>)</p>
+<h4 id="normalize_synapses" class="doc_header"><code>normalize_synapses</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L24" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>normalize_synapses</code>(<strong><code>syn</code></strong>:<code>array</code>, <strong><code>prec</code></strong>=<em><code>1e-32</code></em>, <strong><code>p</code></strong>=<em><code>2</code></em>)</p>
 </blockquote>
 <p>Normalize the synapses</p>
 <p>Args:
@@ -123,7 +123,7 @@ nb_path: "nbs/00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="FlyVec" class="doc_header"><code>class</code> <code>FlyVec</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L38" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FlyVec</code>(<strong><code>synapse_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>], <strong><code>tokenizer_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>], <strong><code>stopword_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>phrases_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>normalize_synapses</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
+<h2 id="FlyVec" class="doc_header"><code>class</code> <code>FlyVec</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L40" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>FlyVec</code>(<strong><code>synapse_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>], <strong><code>tokenizer_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>], <strong><code>stopword_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>phrases_file</code></strong>:<code>Union</code>[<code>Path</code>, <code>str</code>, <code>NoneType</code>]=<em><code>None</code></em>, <strong><code>normalize_synapses</code></strong>:<code>bool</code>=<em><code>True</code></em>)</p>
 </blockquote>
 <p>A class wrapper around a tokenizer, stop words, and synapse weights for hashing words</p>
 
@@ -146,7 +146,7 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If we are testing multiple configurations of <a href="/flyvec/core.html#FlyVec"><code>FlyVec</code></a> from different <code>yaml</code> files, it can be useful to cache the created objects</p>
+<p>Simply run <a href="/flyvec/core.html#FlyVec.load("><code>FlyVec.load()</code></a>) to download the existing model and use as desired</p>
 
 </div>
 </div>
@@ -158,7 +158,7 @@ nb_path: "nbs/00_core.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">FlyVec</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="s2">&quot;./model_config.yaml&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">FlyVec</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 <span class="n">hsh</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_sparse_embedding</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span> <span class="n">hsh</span>
 </pre></div>
 
@@ -281,7 +281,7 @@ Loading synapses...
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="initialize_flyvec" class="doc_header"><code>initialize_flyvec</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L165" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>initialize_flyvec</code>(<strong><code>fname</code></strong>)</p>
+<h4 id="initialize_flyvec" class="doc_header"><code>initialize_flyvec</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/core.py#L179" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>initialize_flyvec</code>(<strong><code>fname</code></strong>)</p>
 </blockquote>
 
 </div>

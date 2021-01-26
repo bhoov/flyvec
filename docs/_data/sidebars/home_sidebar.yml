@@ -16,7 +16,7 @@ entries:
       title: Tokenizer
       url: Tokenizer.html
     - output: web,pdf
-      title: Title
+      title: Downloading the data
       url: Download Helpers.html
     output: web
     title: flyvec

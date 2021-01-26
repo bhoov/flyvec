@@ -12,6 +12,7 @@ from cached_property import cached_property
 from functools import cached_property, lru_cache
 from typing import *
 from fastcore.test import *
+from .downloader import prepare_flyvec_data, get_config_dir, get_model_dir
 
 # Cell
 def softmax(x: np.array, beta=1.0):
@@ -46,6 +47,18 @@ class FlyVec:
         self.stopword_file = str(stopword_file) if stopword_file is not None else None
         self.phrases_file = str(phrases_file) if phrases_file is not None else None
         self.normalize_synapses = normalize_synapses
+
+    @classmethod
+    def load(cls, force_redownload=False):
+        """Load the default configuration for the FlyVec model. If the data is not present in the local
+        flyvec configuration, download it
+
+        Args:
+            force_redownload: Pass `True` to redownload models. Useful if the data gets corrupted
+        """
+        prepare_flyvec_data(force=force_redownload)
+        return cls.from_config(get_model_dir() / "config.yaml")
+
 
     @classmethod
     def from_config(cls, fname: Union[Path, str]):

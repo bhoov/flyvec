@@ -1,6 +1,6 @@
 ---
 
-title: Title
+title: Downloading the data
 
 
 keywords: fastai
@@ -29,24 +29,6 @@ nb_path: "nbs/02_Download Helpers.ipynb"
 </div>
     {% endraw %}
 
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">reload_ext</span> autoreload
-<span class="o">%</span><span class="k">autoreload</span> 2
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I need to download my data directory from the cloud hosted instance:</p>
@@ -57,16 +39,6 @@ nb_path: "nbs/02_Download Helpers.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">dvc.api</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 </div>
     {% endraw %}
@@ -74,171 +46,19 @@ nb_path: "nbs/02_Download Helpers.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">resource_url</span> <span class="o">=</span> <span class="n">dvc</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">get_url</span><span class="p">(</span>
-    <span class="s1">&#39;data&#39;</span><span class="p">,</span>
-    <span class="n">repo</span><span class="o">=</span><span class="s2">&quot;https://github.com/bhoov/flyvec&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/remote/base.py</span> in <span class="ansi-cyan-fg">_process</span><span class="ansi-blue-fg">(self, cache, named_cache, jobs, show_checksums, download)</span>
-<span class="ansi-green-intense-fg ansi-bold">    350</span>                     )
-<span class="ansi-green-fg">--&gt; 351</span><span class="ansi-red-fg">                     fails = sum(
-</span><span class="ansi-green-intense-fg ansi-bold">    352</span>                         executor<span class="ansi-blue-fg">.</span>map<span class="ansi-blue-fg">(</span>func<span class="ansi-blue-fg">,</span> from_infos<span class="ansi-blue-fg">,</span> to_infos<span class="ansi-blue-fg">,</span> names<span class="ansi-blue-fg">)</span>
 
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/concurrent/futures/_base.py</span> in <span class="ansi-cyan-fg">result_iterator</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">    610</span>                     <span class="ansi-green-fg">if</span> timeout <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 611</span><span class="ansi-red-fg">                         </span><span class="ansi-green-fg">yield</span> fs<span class="ansi-blue-fg">.</span>pop<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>result<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    612</span>                     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_config_dir" class="doc_header"><code>get_config_dir</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/downloader.py#L14" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_config_dir</code>()</p>
+</blockquote>
 
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/concurrent/futures/_base.py</span> in <span class="ansi-cyan-fg">result</span><span class="ansi-blue-fg">(self, timeout)</span>
-<span class="ansi-green-intense-fg ansi-bold">    433</span> 
-<span class="ansi-green-fg">--&gt; 434</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_condition<span class="ansi-blue-fg">.</span>wait<span class="ansi-blue-fg">(</span>timeout<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    435</span> 
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/threading.py</span> in <span class="ansi-cyan-fg">wait</span><span class="ansi-blue-fg">(self, timeout)</span>
-<span class="ansi-green-intense-fg ansi-bold">    301</span>             <span class="ansi-green-fg">if</span> timeout <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 302</span><span class="ansi-red-fg">                 </span>waiter<span class="ansi-blue-fg">.</span>acquire<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    303</span>                 gotit <span class="ansi-blue-fg">=</span> <span class="ansi-green-fg">True</span>
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>: 
-
-During handling of the above exception, another exception occurred:
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-4-86c3d6f5c16d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span>
-<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> resource_url = dvc.api.get_url(
-</span><span class="ansi-green-intense-fg ansi-bold">      2</span>     <span class="ansi-blue-fg">&#39;data&#39;</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">      3</span> repo=&#34;https://github.com/bhoov/flyvec&#34;)
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/api.py</span> in <span class="ansi-cyan-fg">get_url</span><span class="ansi-blue-fg">(path, repo, rev, remote)</span>
-<span class="ansi-green-intense-fg ansi-bold">     35</span> 
-<span class="ansi-green-intense-fg ansi-bold">     36</span>         cloud <span class="ansi-blue-fg">=</span> metadata<span class="ansi-blue-fg">.</span>repo<span class="ansi-blue-fg">.</span>cloud
-<span class="ansi-green-fg">---&gt; 37</span><span class="ansi-red-fg">         </span>hash_info <span class="ansi-blue-fg">=</span> _repo<span class="ansi-blue-fg">.</span>repo_tree<span class="ansi-blue-fg">.</span>get_hash<span class="ansi-blue-fg">(</span>path_info<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     38</span>         <span class="ansi-green-fg">return</span> cloud<span class="ansi-blue-fg">.</span>get_url_for<span class="ansi-blue-fg">(</span>remote<span class="ansi-blue-fg">,</span> checksum<span class="ansi-blue-fg">=</span>hash_info<span class="ansi-blue-fg">.</span>value<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     39</span> 
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/funcy/decorators.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">     37</span>         <span class="ansi-green-fg">def</span> wrapper<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     38</span>             call <span class="ansi-blue-fg">=</span> Call<span class="ansi-blue-fg">(</span>func<span class="ansi-blue-fg">,</span> args<span class="ansi-blue-fg">,</span> kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">---&gt; 39</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> deco<span class="ansi-blue-fg">(</span>call<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>dargs<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>dkwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     40</span>         <span class="ansi-green-fg">return</span> wraps<span class="ansi-blue-fg">(</span>func<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">(</span>wrapper<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     41</span> 
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/tree/base.py</span> in <span class="ansi-cyan-fg">use_state</span><span class="ansi-blue-fg">(call)</span>
-<span class="ansi-green-intense-fg ansi-bold">     43</span>     tree <span class="ansi-blue-fg">=</span> call<span class="ansi-blue-fg">.</span>_args<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>  <span class="ansi-red-fg"># pylint: disable=protected-access</span>
-<span class="ansi-green-intense-fg ansi-bold">     44</span>     <span class="ansi-green-fg">with</span> tree<span class="ansi-blue-fg">.</span>state<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---&gt; 45</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> call<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     46</span> 
-<span class="ansi-green-intense-fg ansi-bold">     47</span> 
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/funcy/decorators.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, *a, **kw)</span>
-<span class="ansi-green-intense-fg ansi-bold">     58</span>     <span class="ansi-green-fg">def</span> __call__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>a<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kw<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     59</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> a <span class="ansi-green-fg">and</span> <span class="ansi-green-fg">not</span> kw<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---&gt; 60</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>self<span class="ansi-blue-fg">.</span>_args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>self<span class="ansi-blue-fg">.</span>_kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     61</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     62</span>             <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span><span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_args <span class="ansi-blue-fg">+</span> a<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>dict<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>_kwargs<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kw<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/tree/base.py</span> in <span class="ansi-cyan-fg">get_hash</span><span class="ansi-blue-fg">(self, path_info, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    290</span> 
-<span class="ansi-green-intense-fg ansi-bold">    291</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>isdir<span class="ansi-blue-fg">(</span>path_info<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 292</span><span class="ansi-red-fg">             </span>hash_info <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>get_dir_hash<span class="ansi-blue-fg">(</span>path_info<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    293</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    294</span>             hash_info <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>get_file_hash<span class="ansi-blue-fg">(</span>path_info<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/tree/repo.py</span> in <span class="ansi-cyan-fg">get_dir_hash</span><span class="ansi-blue-fg">(self, path_info, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    370</span>         <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> dvc_tree<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    371</span>             <span class="ansi-green-fg">raise</span> FileNotFoundError
-<span class="ansi-green-fg">--&gt; 372</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> dvc_tree<span class="ansi-blue-fg">.</span>get_dir_hash<span class="ansi-blue-fg">(</span>path_info<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    373</span> 
-<span class="ansi-green-intense-fg ansi-bold">    374</span>     <span class="ansi-green-fg">def</span> get_file_hash<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> path_info<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/tree/dvc.py</span> in <span class="ansi-cyan-fg">get_dir_hash</span><span class="ansi-blue-fg">(self, path_info, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    244</span>                 out <span class="ansi-blue-fg">=</span> outs<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">    245</span>                 <span class="ansi-red-fg"># other code expects us to fetch the dir at this point</span>
-<span class="ansi-green-fg">--&gt; 246</span><span class="ansi-red-fg">                 </span>self<span class="ansi-blue-fg">.</span>_fetch_dir<span class="ansi-blue-fg">(</span>out<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    247</span>                 <span class="ansi-green-fg">return</span> out<span class="ansi-blue-fg">.</span>hash_info
-<span class="ansi-green-intense-fg ansi-bold">    248</span>         <span class="ansi-green-fg">except</span> OutputNotFoundError<span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/tree/dvc.py</span> in <span class="ansi-cyan-fg">_fetch_dir</span><span class="ansi-blue-fg">(self, out, filter_info, download_callback, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">    153</span>         <span class="ansi-green-fg">if</span> self<span class="ansi-blue-fg">.</span>fetch <span class="ansi-green-fg">and</span> out<span class="ansi-blue-fg">.</span>changed_cache<span class="ansi-blue-fg">(</span>filter_info<span class="ansi-blue-fg">=</span>filter_info<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    154</span>             used_cache <span class="ansi-blue-fg">=</span> out<span class="ansi-blue-fg">.</span>get_used_cache<span class="ansi-blue-fg">(</span>filter_info<span class="ansi-blue-fg">=</span>filter_info<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">--&gt; 155</span><span class="ansi-red-fg">             </span>downloaded <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>repo<span class="ansi-blue-fg">.</span>cloud<span class="ansi-blue-fg">.</span>pull<span class="ansi-blue-fg">(</span>used_cache<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    156</span>             <span class="ansi-green-fg">if</span> download_callback<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    157</span>                 download_callback<span class="ansi-blue-fg">(</span>downloaded<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/data_cloud.py</span> in <span class="ansi-cyan-fg">pull</span><span class="ansi-blue-fg">(self, cache, jobs, remote, show_checksums)</span>
-<span class="ansi-green-intense-fg ansi-bold">     85</span>         remote <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>get_remote<span class="ansi-blue-fg">(</span>remote<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;pull&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     86</span> 
-<span class="ansi-green-fg">---&gt; 87</span><span class="ansi-red-fg">         return remote.pull(
-</span><span class="ansi-green-intense-fg ansi-bold">     88</span>             self<span class="ansi-blue-fg">.</span>repo<span class="ansi-blue-fg">.</span>cache<span class="ansi-blue-fg">.</span>local<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">     89</span>             cache<span class="ansi-blue-fg">,</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/remote/base.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-fg">(obj, *args, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">     54</span>     <span class="ansi-green-fg">def</span> wrapper<span class="ansi-blue-fg">(</span>obj<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">     55</span>         <span class="ansi-green-fg">with</span> obj<span class="ansi-blue-fg">.</span>index<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">---&gt; 56</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> f<span class="ansi-blue-fg">(</span>obj<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     57</span> 
-<span class="ansi-green-intense-fg ansi-bold">     58</span>     <span class="ansi-green-fg">return</span> wrapper
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/remote/base.py</span> in <span class="ansi-cyan-fg">pull</span><span class="ansi-blue-fg">(self, cache, named_cache, jobs, show_checksums)</span>
-<span class="ansi-green-intense-fg ansi-bold">    440</span>     <span class="ansi-blue-fg">@</span>index_locked
-<span class="ansi-green-intense-fg ansi-bold">    441</span>     <span class="ansi-green-fg">def</span> pull<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> cache<span class="ansi-blue-fg">,</span> named_cache<span class="ansi-blue-fg">,</span> jobs<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">None</span><span class="ansi-blue-fg">,</span> show_checksums<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">False</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 442</span><span class="ansi-red-fg">         ret = self._process(
-</span><span class="ansi-green-intense-fg ansi-bold">    443</span>             cache<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    444</span>             named_cache<span class="ansi-blue-fg">,</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/remote/base.py</span> in <span class="ansi-cyan-fg">_process</span><span class="ansi-blue-fg">(self, cache, named_cache, jobs, show_checksums, download)</span>
-<span class="ansi-green-intense-fg ansi-bold">    388</span>                                 name<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-intense-fg ansi-bold">    389</span>                             )
-<span class="ansi-green-fg">--&gt; 390</span><span class="ansi-red-fg">                     fails = sum(
-</span><span class="ansi-green-intense-fg ansi-bold">    391</span>                         future<span class="ansi-blue-fg">.</span>result<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    392</span>                         for future in concat(
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/concurrent/futures/_base.py</span> in <span class="ansi-cyan-fg">__exit__</span><span class="ansi-blue-fg">(self, exc_type, exc_val, exc_tb)</span>
-<span class="ansi-green-intense-fg ansi-bold">    634</span> 
-<span class="ansi-green-intense-fg ansi-bold">    635</span>     <span class="ansi-green-fg">def</span> __exit__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> exc_type<span class="ansi-blue-fg">,</span> exc_val<span class="ansi-blue-fg">,</span> exc_tb<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 636</span><span class="ansi-red-fg">         </span>self<span class="ansi-blue-fg">.</span>shutdown<span class="ansi-blue-fg">(</span>wait<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    637</span>         <span class="ansi-green-fg">return</span> <span class="ansi-green-fg">False</span>
-<span class="ansi-green-intense-fg ansi-bold">    638</span> 
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/concurrent/futures/thread.py</span> in <span class="ansi-cyan-fg">shutdown</span><span class="ansi-blue-fg">(self, wait)</span>
-<span class="ansi-green-intense-fg ansi-bold">    234</span>         <span class="ansi-green-fg">if</span> wait<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    235</span>             <span class="ansi-green-fg">for</span> t <span class="ansi-green-fg">in</span> self<span class="ansi-blue-fg">.</span>_threads<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">--&gt; 236</span><span class="ansi-red-fg">                 </span>t<span class="ansi-blue-fg">.</span>join<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    237</span>     shutdown<span class="ansi-blue-fg">.</span>__doc__ <span class="ansi-blue-fg">=</span> _base<span class="ansi-blue-fg">.</span>Executor<span class="ansi-blue-fg">.</span>shutdown<span class="ansi-blue-fg">.</span>__doc__
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/threading.py</span> in <span class="ansi-cyan-fg">join</span><span class="ansi-blue-fg">(self, timeout)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1009</span> 
-<span class="ansi-green-intense-fg ansi-bold">   1010</span>         <span class="ansi-green-fg">if</span> timeout <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-&gt; 1011</span><span class="ansi-red-fg">             </span>self<span class="ansi-blue-fg">.</span>_wait_for_tstate_lock<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1012</span>         <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1013</span>             <span class="ansi-red-fg"># the behavior of a negative timeout isn&#39;t documented, but</span>
-
-<span class="ansi-green-fg">~/anaconda3/envs/flyvec/lib/python3.8/threading.py</span> in <span class="ansi-cyan-fg">_wait_for_tstate_lock</span><span class="ansi-blue-fg">(self, block, timeout)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1025</span>         <span class="ansi-green-fg">if</span> lock <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>  <span class="ansi-red-fg"># already determined that the C code is done</span>
-<span class="ansi-green-intense-fg ansi-bold">   1026</span>             <span class="ansi-green-fg">assert</span> self<span class="ansi-blue-fg">.</span>_is_stopped
-<span class="ansi-green-fg">-&gt; 1027</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">elif</span> lock<span class="ansi-blue-fg">.</span>acquire<span class="ansi-blue-fg">(</span>block<span class="ansi-blue-fg">,</span> timeout<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1028</span>             lock<span class="ansi-blue-fg">.</span>release<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1029</span>             self<span class="ansi-blue-fg">.</span>_stop<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
 </div>
+
 </div>
 
 </div>
@@ -250,66 +70,136 @@ During handling of the above exception, another exception occurred:
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>python -m dvc pull -f
-</pre></div>
-
-    </div>
-</div>
-</div>
 
 <div class="output_wrapper">
 <div class="output">
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>^C
-Traceback (most recent call last):
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/runpy.py&#34;, line 194, in _run_module_as_main
-    return _run_code(code, main_globals, None,
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/runpy.py&#34;, line 87, in _run_code
-    exec(code, run_globals)
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/__main__.py&#34;, line 4, in &lt;module&gt;
-    from dvc.main import main
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/main.py&#34;, line 8, in &lt;module&gt;
-    from dvc.cli import parse_args
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/cli.py&#34;, line 7, in &lt;module&gt;
-    from .command import (
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/command/experiments.py&#34;, line 19, in &lt;module&gt;
-    from dvc.utils.flatten import flatten
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/dvc/utils/flatten.py&#34;, line 1, in &lt;module&gt;
-    import flatten_dict
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/flatten_dict/__init__.py&#34;, line 1, in &lt;module&gt;
-    import pkg_resources
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/pkg_resources/__init__.py&#34;, line 3268, in &lt;module&gt;
-    def _initialize_master_working_set():
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/pkg_resources/__init__.py&#34;, line 3251, in _call_aside
-    f(*args, **kwargs)
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/pkg_resources/__init__.py&#34;, line 3280, in _initialize_master_working_set
-    working_set = WorkingSet._build_master()
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/pkg_resources/__init__.py&#34;, line 573, in _build_master
-    ws = cls()
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/pkg_resources/__init__.py&#34;, line 566, in __init__
-    self.add_entry(entry)
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/pkg_resources/__init__.py&#34;, line 622, in add_entry
-    for dist in find_distributions(entry, True):
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/pkg_resources/__init__.py&#34;, line 2078, in find_on_path
-    for dist in factory(fullpath):
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/pkg_resources/__init__.py&#34;, line 2146, in distributions_from_metadata
-    metadata = PathMetadata(root, path)
-  File &#34;/Users/benjamin.hoover@ibm.com/anaconda3/envs/flyvec/lib/python3.8/site-packages/pkg_resources/__init__.py&#34;, line 1944, in __init__
-    def __init__(self, path, egg_info):
-KeyboardInterrupt
-</pre>
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_model_dir" class="doc_header"><code>get_model_dir</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/downloader.py#L18" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_model_dir</code>()</p>
+</blockquote>
+
 </div>
+
 </div>
 
 </div>
 </div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="download_flyvec_data" class="doc_header"><code>download_flyvec_data</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/downloader.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>download_flyvec_data</code>(<strong><code>outfile</code></strong>=<em><code>None</code></em>, <strong><code>force</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Download the zipped flyvec model from the cloud to a local file. If <code>outfile</code> is not provided,
+use (the OS's) TEMPDIR / 'flyvec-data.zip'</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Extract the zipfile to the <code>flyvec</code> configuration directory (by default, <code>~/.cache/flyvec</code>, inspired by huggingface)</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="unzip_data" class="doc_header"><code>unzip_data</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/downloader.py#L56" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>unzip_data</code>(<strong><code>path_to_zipped_data</code></strong>, <strong><code>outdir</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Unzip the flyvec models to the config directory. If <code>outdir</code> is not provided, use default flyvec configuration dir</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="prepare_flyvec_data" class="doc_header"><code>prepare_flyvec_data</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/downloader.py#L68" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>prepare_flyvec_data</code>(<strong><code>force</code></strong>=<em><code>False</code></em>)</p>
+</blockquote>
+<p>Create pipeline to download flyvec data with default settings.</p>
+<p>Args:
+    force: If true, don't check for existance of files</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}

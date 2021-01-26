@@ -15,10 +15,16 @@ index = {"softmax": "00_core.ipynb",
          "process_line": "01_Tokenizer.ipynb",
          "file2tokens": "01_Tokenizer.ipynb",
          "PATCH_DICT": "01_Tokenizer.ipynb",
-         "GensimTokenizer": "01_Tokenizer.ipynb"}
+         "GensimTokenizer": "01_Tokenizer.ipynb",
+         "get_config_dir": "02_Download Helpers.ipynb",
+         "get_model_dir": "02_Download Helpers.ipynb",
+         "download_flyvec_data": "02_Download Helpers.ipynb",
+         "unzip_data": "02_Download Helpers.ipynb",
+         "prepare_flyvec_data": "02_Download Helpers.ipynb"}
 
 modules = ["core.py",
-           "tokenizer.py"]
+           "tokenizer.py",
+           "downloader.py"]
 
 doc_url = "https://bhoov.github.io/flyvec/"
 
