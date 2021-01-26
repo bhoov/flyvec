@@ -11,7 +11,7 @@ from gensim.models.phrases import Phrases, Phraser
 import os
 import regex as re
 import string
-from functools import cached_property
+from cached_property import cached_property
 import numpy as np
 from typing import *
 from fastcore.test import *
