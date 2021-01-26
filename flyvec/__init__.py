@@ -1,5 +1,5 @@
-__version__ = "0.0.3"
-from .core import FlyVec, initialize_flyvec
+__version__ = "0.0.4"
+from .core import FlyVec
 from .tokenizer import GensimTokenizer
 
-__all__ = ["FlyVec", "initialize_flyvec", "GensimTokenizer"]
+__all__ = ["FlyVec", "GensimTokenizer"]

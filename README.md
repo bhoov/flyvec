@@ -10,8 +10,11 @@ Code based on the ICLR 2021 paper [Can a Fruit Fly Learn Word Embeddings?](https
 
 ## How to use
 
-```
-model = FlyVec.from_config("../data/model_config.yaml") # TODO Load on first instantiation with default model
+```python
+import numpy as np
+from flyvec import FlyVec
+
+model = FlyVec.load()
 embed_info = model.get_sparse_embedding("market")
 ```
 
@@ -20,9 +23,9 @@ embed_info = model.get_sparse_embedding("market")
     Loading synapses...
 
 
-FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 40,000 words, all lower-cased, with special tokens for numbers (`<NUM>`) and unknown words (`<UNK`). See `Tokenizer` for details.
+FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 40,000 words, all lower-cased, with special tokens for numbers (`<NUM>`) and unknown words (`<UNK>`). See `Tokenizer` for details.
 
-```
+```python
 # Batch generate word embeddings
 sentence = "Supreme Court dismissed the criminal charges."
 tokens = model.tokenize(sentence)

@@ -5,7 +5,6 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 index = {"softmax": "00_core.ipynb",
          "normalize_synapses": "00_core.ipynb",
          "FlyVec": "00_core.ipynb",
-         "initialize_flyvec": "00_core.ipynb",
          "line2sentences": "01_Tokenizer.ipynb",
          "spattern": "01_Tokenizer.ipynb",
          "strip_punc_unicode": "01_Tokenizer.ipynb",
