@@ -6,6 +6,7 @@ channels:
 dependencies:
   - pip>=20.0.0
   - python=3.6
+  - twine
   - nbdev
   - jedi=0.17.2
   - jupyter
@@ -15,3 +16,5 @@ dependencies:
   - jupyter_contrib_nbextensions
   - matplotlib
   - nb_conda
+  - pip:
+    - dvc[s3] 
