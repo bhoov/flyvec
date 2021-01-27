@@ -55,6 +55,12 @@ nb_path: "nbs/index.ipynb"
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Basic-Usage">Basic Usage<a class="anchor-link" href="#Basic-Usage"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -65,7 +71,6 @@ nb_path: "nbs/index.ipynb"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">flyvec</span> <span class="kn">import</span> <span class="n">FlyVec</span>
 
-<span class="c1"># Basic usage</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">FlyVec</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
 <span class="n">embed_info</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_sparse_embedding</span><span class="p">(</span><span class="s2">&quot;market&quot;</span><span class="p">);</span> <span class="n">embed_info</span>
 </pre></div>
@@ -113,6 +118,12 @@ nb_path: "nbs/index.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Changing-the-Hash-Length">Changing the Hash Length<a class="anchor-link" href="#Changing-the-Hash-Length"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -146,6 +157,12 @@ nb_path: "nbs/index.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Handling-&quot;unknown&quot;-tokens">Handling "unknown" tokens<a class="anchor-link" href="#Handling-&quot;unknown&quot;-tokens"> </a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 40,000 words, all lower-cased, with special tokens for numbers (<code>&lt;NUM&gt;</code>) and unknown words (<code>&lt;UNK&gt;</code>). Unknown tokens have the token id of <code>0</code>, so we can use this to filter unknown tokens.</p>
@@ -186,6 +203,12 @@ nb_path: "nbs/index.ipynb"
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Batch-generating-word-embeddings">Batch generating word embeddings<a class="anchor-link" href="#Batch-generating-word-embeddings"> </a></h3>
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -228,6 +251,12 @@ EMBEDDINGS:  [[0 1 0 ... 0 0 0]
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Creating-dense-representations">Creating dense representations<a class="anchor-link" href="#Creating-dense-representations"> </a></h3>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We encourage usage of the sparse word embeddings which is calculated by selecting the top <code>H</code> activated <a href="https://en.wikipedia.org/wiki/Kenyon_cell">Kenyon Cells</a> in our model. However, if you need a dense representation of the word embeddings, you can get the raw <a href="/flyvec/core.html#softmax"><code>softmax</code></a>ed activations by running:</p>

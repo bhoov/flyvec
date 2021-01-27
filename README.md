@@ -10,11 +10,12 @@ Code based on the ICLR 2021 paper [Can a Fruit Fly Learn Word Embeddings?](https
 
 ## How to use
 
+### Basic Usage
+
 ```
 import numpy as np
 from flyvec import FlyVec
 
-# Basic usage
 model = FlyVec.load()
 embed_info = model.get_sparse_embedding("market"); embed_info
 ```
@@ -46,8 +47,9 @@ embed_info = model.get_sparse_embedding("market"); embed_info
 
 
 
+### Changing the Hash Length
+
 ```
-# Changing the hash length
 small_embed = model.get_sparse_embedding("market", 4); np.sum(small_embed['embedding'])
 ```
 
@@ -58,10 +60,11 @@ small_embed = model.get_sparse_embedding("market", 4); np.sum(small_embed['embed
 
 
 
+### Handling "unknown" tokens
+
 FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 40,000 words, all lower-cased, with special tokens for numbers (`<NUM>`) and unknown words (`<UNK>`). Unknown tokens have the token id of `0`, so we can use this to filter unknown tokens.
 
 ```
-# Filtering for unknown tokens
 unk_embed = model.get_sparse_embedding("DefNotAWord")
 if unk_embed['id'] == 0:
     print("I AM THE UNKNOWN TOKEN DON'T USE ME FOR ANYTHING IMPORTANT")
@@ -70,8 +73,9 @@ if unk_embed['id'] == 0:
     I AM THE UNKNOWN TOKEN DON'T USE ME FOR ANYTHING IMPORTANT
 
 
+### Batch generating word embeddings
+
 ```
-# Batch generate word embeddings
 sentence = "Supreme Court dismissed the criminal charges."
 tokens = model.tokenize(sentence)
 embedding_info = [model.get_sparse_embedding(t) for t in tokens]
@@ -88,6 +92,8 @@ print("EMBEDDINGS: ", embeddings)
      [0 0 0 ... 0 1 0]
      [0 0 0 ... 0 1 0]]
 
+
+### Creating dense representations
 
 We encourage usage of the sparse word embeddings which is calculated by selecting the top `H` activated [Kenyon Cells](https://en.wikipedia.org/wiki/Kenyon_cell) in our model. However, if you need a dense representation of the word embeddings, you can get the raw `softmax`ed activations by running:
 
