@@ -11,15 +11,64 @@ Code based on the ICLR 2021 paper [Can a Fruit Fly Learn Word Embeddings?](https
 ## How to use
 
 ```python
-#hide_output
 import numpy as np
 from flyvec import FlyVec
 
+# Basic usage
 model = FlyVec.load()
-embed_info = model.get_sparse_embedding("market")
+embed_info = model.get_sparse_embedding("market"); embed_info
 ```
 
-FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 40,000 words, all lower-cased, with special tokens for numbers (`<NUM>`) and unknown words (`<UNK>`). See `Tokenizer` for details.
+
+
+
+    {'token': 'market',
+     'id': 1180,
+     'embedding': array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1,
+            0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
+            1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0], dtype=int8)}
+
+
+
+```python
+# Changing the hash length
+small_embed = model.get_sparse_embedding("market", 4); np.sum(small_embed['embedding'])
+```
+
+
+
+
+    4
+
+
+
+FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 40,000 words, all lower-cased, with special tokens for numbers (`<NUM>`) and unknown words (`<UNK>`). Unknown tokens have the token id of `0`, so we can use this to filter unknown tokens.
+
+```python
+# Filtering for unknown tokens
+unk_embed = model.get_sparse_embedding("DefNotAWord")
+if unk_embed['id'] == 0:
+    print("I AM THE UNKNOWN TOKEN DON'T USE ME FOR ANYTHING IMPORTANT")
+```
+
+    I AM THE UNKNOWN TOKEN DON'T USE ME FOR ANYTHING IMPORTANT
+
 
 ```python
 # Batch generate word embeddings
@@ -39,3 +88,31 @@ print("EMBEDDINGS: ", embeddings)
      [0 0 0 ... 0 1 0]
      [0 0 0 ... 0 1 0]]
 
+
+We encourage usage of the sparse word embeddings which is calculated by selecting the top `H` activated [Kenyon Cells](https://en.wikipedia.org/wiki/Kenyon_cell) in our model. However, if you need a dense representation of the word embeddings, you can get the raw `softmax`ed activations by running:
+
+```python
+# Generate dense word embeddings
+dense_embed = model.get_dense_embedding("incredible"); 
+print(f"First 10 entries of the dense embedding:\n {dense_embed['embedding'][:10]}")
+```
+
+    First 10 entries of the dense embedding:
+     [1.8123710e-05 6.1162762e-05 7.3589981e-05 3.7589352e-04 1.0641745e-04
+     1.6521414e-04 3.7847902e-05 9.5790623e-05 1.2732553e-04 5.6038076e-05]
+
+
+# Citation
+
+If you use this in your work, please cite:
+
+```
+@inproceedings{
+liang2021can,
+title={Can a Fruit Fly Learn Word Embeddings?},
+author={Yuchen Liang and Chaitanya Ryali and Benjamin Hoover and Saket Navlakha and Leopold Grinberg and Mohammed J Zaki and Dmitry Krotov},
+booktitle={International Conference on Learning Representations},
+year={2021},
+url={https://openreview.net/forum?id=xfmSoxdxFCG}
+}
+```

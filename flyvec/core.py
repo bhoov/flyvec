@@ -82,7 +82,6 @@ class FlyVec:
     @cached_property
     def synapses(self):
         """The primary weights learned by the model"""
-        print("Loading synapses...")
         syn = np.load(self.synapse_file)
 
         if self.normalize_synapses: return normalize_synapses(syn)
@@ -90,13 +89,11 @@ class FlyVec:
 
     @cached_property
     def tokenizer(self):
-        print("Loading Tokenizer...")
         return GensimTokenizer.from_file(self.tokenizer_file, self.phrases_file)
 
     @cached_property
     def stop_words(self):
         """Words the model should not respond to"""
-        print("Loading stop words...")
         return set(np.load(self.stopword_file))
 
     @cached_property
@@ -110,7 +107,7 @@ class FlyVec:
     def unknown_embedding_info(self):
         return {
             "token": "<UNK>",
-            "tok_id": 0,
+            "id": 0,
             "embedding": np.zeros(self.n_neurons).astype(np.uint8)
         }
 

@@ -65,11 +65,81 @@ nb_path: "nbs/index.ipynb"
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">flyvec</span> <span class="kn">import</span> <span class="n">FlyVec</span>
 
+<span class="c1"># Basic usage</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">FlyVec</span><span class="o">.</span><span class="n">load</span><span class="p">()</span>
-<span class="n">embed_info</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_sparse_embedding</span><span class="p">(</span><span class="s2">&quot;market&quot;</span><span class="p">)</span>
+<span class="n">embed_info</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_sparse_embedding</span><span class="p">(</span><span class="s2">&quot;market&quot;</span><span class="p">);</span> <span class="n">embed_info</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;token&#39;: &#39;market&#39;,
+ &#39;id&#39;: 1180,
+ &#39;embedding&#39;: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1,
+        0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0], dtype=int8)}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">small_embed</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_sparse_embedding</span><span class="p">(</span><span class="s2">&quot;market&quot;</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">small_embed</span><span class="p">[</span><span class="s1">&#39;embedding&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>4</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -78,11 +148,44 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 40,000 words, all lower-cased, with special tokens for numbers (<code>&lt;NUM&gt;</code>) and unknown words (<code>&lt;UNK&gt;</code>). See <code>Tokenizer</code> for details.</p>
+<p>FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 40,000 words, all lower-cased, with special tokens for numbers (<code>&lt;NUM&gt;</code>) and unknown words (<code>&lt;UNK&gt;</code>). Unknown tokens have the token id of <code>0</code>, so we can use this to filter unknown tokens.</p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">unk_embed</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_sparse_embedding</span><span class="p">(</span><span class="s2">&quot;DefNotAWord&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">unk_embed</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I AM THE UNKNOWN TOKEN DON&#39;T USE ME FOR ANYTHING IMPORTANT&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>I AM THE UNKNOWN TOKEN DON&#39;T USE ME FOR ANYTHING IMPORTANT
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -125,6 +228,63 @@ EMBEDDINGS:  [[0 1 0 ... 0 0 0]
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We encourage usage of the sparse word embeddings which is calculated by selecting the top <code>H</code> activated <a href="https://en.wikipedia.org/wiki/Kenyon_cell">Kenyon Cells</a> in our model. However, if you need a dense representation of the word embeddings, you can get the raw <a href="/flyvec/core.html#softmax"><code>softmax</code></a>ed activations by running:</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dense_embed</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_dense_embedding</span><span class="p">(</span><span class="s2">&quot;incredible&quot;</span><span class="p">);</span> 
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First 10 entries of the dense embedding:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">dense_embed</span><span class="p">[</span><span class="s1">&#39;embedding&#39;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>First 10 entries of the dense embedding:
+ [1.8123710e-05 6.1162762e-05 7.3589981e-05 3.7589352e-04 1.0641745e-04
+ 1.6521414e-04 3.7847902e-05 9.5790623e-05 1.2732553e-04 5.6038076e-05]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Citation">Citation<a class="anchor-link" href="#Citation"> </a></h1><p>If you use this in your work, please cite:</p>
+
+<pre><code>@inproceedings{
+liang2021can,
+title={Can a Fruit Fly Learn Word Embeddings?},
+author={Yuchen Liang and Chaitanya Ryali and Benjamin Hoover and Saket Navlakha and Leopold Grinberg and Mohammed J Zaki and Dmitry Krotov},
+booktitle={International Conference on Learning Representations},
+year={2021},
+url={https://openreview.net/forum?id=xfmSoxdxFCG}
+}</code></pre>
+
+</div>
+</div>
+</div>
 </div>
  
 

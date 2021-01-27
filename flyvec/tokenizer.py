@@ -104,7 +104,6 @@ class GensimTokenizer:
         if phraser_fname is not None:
             p = Phraser.load(phraser_fname)
         else:
-            print("No phraser specified. Proceeding without phrases")
             p = Phraser(Phrases([[]]))
 
         return cls(d, p)
