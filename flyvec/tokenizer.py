@@ -13,8 +13,10 @@ import regex as re
 import string
 from cached_property import cached_property
 import numpy as np
+
 from typing import *
 from fastcore.test import *
+from .downloader import prepare_flyvec_data, get_config_dir, get_model_dir
 
 # Cell
 spattern = re.compile(r"(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s")
