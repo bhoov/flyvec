@@ -187,7 +187,7 @@ class GensimTokenizer:
 
     @cached_property
     def vocab(self):
-        return self.dictionary.keys()
+        return list(self.dictionary.keys())
 
     @cached_property
     def token_vocab(self):

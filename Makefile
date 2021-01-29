@@ -5,6 +5,9 @@ SRC = $(wildcard nbs/*.ipynb)
 all: flyvec docs
 
 prep:
+	nbdev_clean_nbs && nbdev_build_lib && nbdev_build_docs
+
+bump:
 	nbdev_clean_nbs && nbdev_build_lib && nbdev_build_docs && nbdev_bump_version
 
 flyvec: $(SRC)

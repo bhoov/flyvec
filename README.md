@@ -124,22 +124,7 @@ model.dictionary;
 ```
 
     ['properties', 'a', 'among', 'and', 'any']
-
-
-
-    ---------------------------------------------------------------------------
-
-    TypeError                                 Traceback (most recent call last)
-
-    <ipython-input-13-74d5f287910c> in <module>
-          3 
-          4 # The IDs that correspond to those tokens
-    ----> 5 print(model.vocab[:5])
-          6 
-          7 # The dictionary object itself
-
-
-    TypeError: 'set' object is not subscriptable
+    [2, 3, 4, 5, 6]
 
 
 # Citation
