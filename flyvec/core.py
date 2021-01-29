@@ -92,16 +92,24 @@ class FlyVec:
         return GensimTokenizer.from_file(self.tokenizer_file, self.phrases_file)
 
     @cached_property
-    def stop_words(self):
-        """Words the model should not respond to"""
-        return set(np.load(self.stopword_file))
+    def dictionary(self):
+        return self.tokenizer.dictionary
 
     @cached_property
     def vocab(self):
-        return set(self.tokenizer.vocab)
+        return self.tokenizer.vocab
+
+    @cached_property
+    def token_vocab(self):
+        return self.tokenizer.token_vocab
 
     @cached_property
     def n_vocab(self): return self.tokenizer.n_vocab()
+
+    @cached_property
+    def stop_words(self):
+        """Words the model should not respond to"""
+        return set(np.load(self.stopword_file))
 
     @cached_property
     def unknown_embedding_info(self):

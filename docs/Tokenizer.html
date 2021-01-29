@@ -692,7 +692,7 @@ nb_path: "nbs/01_Tokenizer.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <a href="/flyvec/Tokenizer.html#GensimTokenizer"><code>GensimTokenizer</code></a> is a simple wrapper around gensim's <code>Dictionary</code> and <code>Phraser</code> classes that aligns them with our simple tokenization rules. Assuming you have a saved Gensim tokenization, you can use the model as follows:</p>
+<p>The <a href="/flyvec/Tokenizer.html#GensimTokenizer"><code>GensimTokenizer</code></a> is a simple wrapper around gensim's <code>Dictionary</code> and <code>Phraser</code> classes that aligns them with our simple tokenization rules. You can use the model for converting between tokens and ids as follows:</p>
 
 </div>
 </div>
@@ -760,6 +760,96 @@ nb_path: "nbs/01_Tokenizer.ipynb"
 
 </div>
 
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are several different views into the vocabulary of the model.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tok</span><span class="o">.</span><span class="n">token_vocab</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;properties&#39;, &#39;a&#39;, &#39;among&#39;, &#39;and&#39;, &#39;any&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">tok</span><span class="o">.</span><span class="n">vocab</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[2, 3, 4, 5, 6]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">tok</span><span class="o">.</span><span class="n">dictionary</span><span class="p">;</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
 

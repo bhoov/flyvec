@@ -189,6 +189,10 @@ class GensimTokenizer:
     def vocab(self):
         return self.dictionary.keys()
 
+    @cached_property
+    def token_vocab(self):
+        return list(self.dictionary.values())
+
     def __len__(self):
         return self.n_vocab()
 
