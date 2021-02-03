@@ -253,53 +253,6 @@ EMBEDDINGS:  [[0 1 0 ... 0 0 0]
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Creating-dense-representations">Creating dense representations<a class="anchor-link" href="#Creating-dense-representations"> </a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>We encourage usage of the sparse word embeddings which is calculated by selecting the top <code>H</code> activated <a href="https://en.wikipedia.org/wiki/Kenyon_cell">Kenyon Cells</a> in our model. However, if you need a dense representation of the word embeddings, you can get the raw <a href="/flyvec/core.html#softmax"><code>softmax</code></a>ed activations by running:</p>
-
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dense_embed</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_dense_embedding</span><span class="p">(</span><span class="s2">&quot;incredible&quot;</span><span class="p">);</span> 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First 10 entries of the dense embedding:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">dense_embed</span><span class="p">[</span><span class="s1">&#39;embedding&#39;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>First 10 entries of the dense embedding:
- [1.8123710e-05 6.1162762e-05 7.3589981e-05 3.7589352e-04 1.0641745e-04
- 1.6521414e-04 3.7847902e-05 9.5790623e-05 1.2732553e-04 5.6038076e-05]
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Viewing-the-vocabulary">Viewing the vocabulary<a class="anchor-link" href="#Viewing-the-vocabulary"> </a></h3><p>The vocabulary under the hood uses the gensim <code>Dictionary</code> and can be accessed by either IDs (<code>int</code>s) or Tokens (<code>str</code>s)</p>
 
 </div>
@@ -343,6 +296,13 @@ EMBEDDINGS:  [[0 1 0 ... 0 0 0]
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Training">Training<a class="anchor-link" href="#Training"> </a></h3><p>Please note that training <code>flyvec</code> on your own custom corpus is not currently supported.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Citation">Citation<a class="anchor-link" href="#Citation"> </a></h1><p>If you use this in your work, please cite:</p>

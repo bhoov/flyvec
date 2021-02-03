@@ -93,21 +93,6 @@ print("EMBEDDINGS: ", embeddings)
      [0 0 0 ... 0 1 0]]
 
 
-### Creating dense representations
-
-We encourage usage of the sparse word embeddings which is calculated by selecting the top `H` activated [Kenyon Cells](https://en.wikipedia.org/wiki/Kenyon_cell) in our model. However, if you need a dense representation of the word embeddings, you can get the raw `softmax`ed activations by running:
-
-```
-# Generate dense word embeddings
-dense_embed = model.get_dense_embedding("incredible"); 
-print(f"First 10 entries of the dense embedding:\n {dense_embed['embedding'][:10]}")
-```
-
-    First 10 entries of the dense embedding:
-     [1.8123710e-05 6.1162762e-05 7.3589981e-05 3.7589352e-04 1.0641745e-04
-     1.6521414e-04 3.7847902e-05 9.5790623e-05 1.2732553e-04 5.6038076e-05]
-
-
 ### Viewing the vocabulary
 
 The vocabulary under the hood uses the gensim `Dictionary` and can be accessed by either IDs (`int`s) or Tokens (`str`s)
@@ -126,6 +111,10 @@ model.dictionary;
     ['properties', 'a', 'among', 'and', 'any']
     [2, 3, 4, 5, 6]
 
+
+### Training
+
+Please note that training `flyvec` on your own custom corpus is not currently supported. 
 
 # Citation
 
