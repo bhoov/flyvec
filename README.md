@@ -1,8 +1,12 @@
 # FlyVec
-> Flybrain-inspired Sparse Binary Word Embeddings
+> Sparse Binary Word Embeddings Inspired by the Fruit Fly Brain
 
 
-Code based on the ICLR 2021 paper [Can a Fruit Fly Learn Word Embeddings?](https://openreview.net/forum?id=xfmSoxdxFCG ). A work in progress.
+Code based on the ICLR 2021 paper [Can a Fruit Fly Learn Word Embeddings?](https://arxiv.org/abs/2101.06887).
+
+In this work we use a well-established neurobiological network motif from the mushroom body of the fruit fly brain to learn sparse binary word embeddings from raw unstructured text. This package allows the user to access pre-trained word embeddings and generate sparse binary hash codes for individual words. 
+
+Interactive demos of the learned concepts available at [flyvec.org](http://flyvec.org).
 
 ## Install
 
@@ -11,6 +15,7 @@ Code based on the ICLR 2021 paper [Can a Fruit Fly Learn Word Embeddings?](https
 ## How to use
 
 ### Basic Usage
+An example below illustrates how one can access the binary word embedding for individual tokens for a default hash length `k=50`. 
 
 ```
 import numpy as np
@@ -48,6 +53,7 @@ embed_info = model.get_sparse_embedding("market"); embed_info
 
 
 ### Changing the Hash Length
+The user can obtain the FlyVec embeddings for any hash length using the following example. 
 
 ```
 small_embed = model.get_sparse_embedding("market", 4); np.sum(small_embed['embedding'])
@@ -62,7 +68,7 @@ small_embed = model.get_sparse_embedding("market", 4); np.sum(small_embed['embed
 
 ### Handling "unknown" tokens
 
-FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 20,000 words, all lower-cased, with special tokens for numbers (`<NUM>`) and unknown words (`<UNK>`). Unknown tokens have the token id of `0`, so we can use this to filter unknown tokens.
+FlyVec uses a simple, word-based tokenizer. The provided model uses a vocabulary with about 20,000 words, all lower-cased, with special tokens for numbers (`<NUM>`) and unknown words (`<UNK>`). Unknown tokens have the token id of `0`, which can be used to filter unknown tokens.
 
 ```
 unk_embed = model.get_sparse_embedding("DefNotAWord")
@@ -74,6 +80,7 @@ if unk_embed['id'] == 0:
 
 
 ### Batch generating word embeddings
+Embeddings for individual words in a sentence can be obtained using this snippet. 
 
 ```
 sentence = "Supreme Court dismissed the criminal charges."
@@ -93,9 +100,9 @@ print("EMBEDDINGS: ", embeddings)
      [0 0 0 ... 0 1 0]]
 
 
-### Viewing the vocabulary
+### FlyVec vocabulary
 
-The vocabulary under the hood uses the gensim `Dictionary` and can be accessed by either IDs (`int`s) or Tokens (`str`s)
+The vocabulary under the hood uses the gensim `Dictionary` and can be accessed by either IDs (`int`s) or Tokens (`str`s).
 
 ```
 # The tokens in the vocabulary
@@ -114,19 +121,18 @@ model.dictionary;
 
 ### Training
 
-Please note that training `flyvec` on your own custom corpus is not currently supported. 
+Please note that training `FlyVec` on your own custom corpus is not currently supported. 
 
 # Citation
 
 If you use this in your work, please cite:
 
 ```
-@inproceedings{
-liang2021can,
-title={Can a Fruit Fly Learn Word Embeddings?},
-author={Yuchen Liang and Chaitanya Ryali and Benjamin Hoover and Saket Navlakha and Leopold Grinberg and Mohammed J Zaki and Dmitry Krotov},
-booktitle={International Conference on Learning Representations},
-year={2021},
-url={https://openreview.net/forum?id=xfmSoxdxFCG}
+@article{liang2021can,
+  title={Can a Fruit Fly Learn Word Embeddings?},
+  author={Liang, Yuchen and Ryali, Chaitanya K and Hoover, Benjamin and Grinberg, Leopold and Navlakha, Saket and Zaki, Mohammed J and Krotov, Dmitry},
+  journal={arXiv preprint arXiv:2101.06887},
+  year={2021}
+  url={https://arxiv.org/abs/2101.06887}
 }
 ```

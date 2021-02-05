@@ -6,8 +6,8 @@ title: FlyVec
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "Flybrain-inspired Sparse Binary Word Embeddings"
-description: "Flybrain-inspired Sparse Binary Word Embeddings"
+summary: "Sparse Binary Word Embeddings Inspired by the Fruit Fly Brain"
+description: "Sparse Binary Word Embeddings Inspired by the Fruit Fly Brain"
 nb_path: "nbs/index.ipynb"
 ---
 <!--
@@ -31,7 +31,9 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Code based on the ICLR 2021 paper <a href="https://openreview.net/forum?id=xfmSoxdxFCG">Can a Fruit Fly Learn Word Embeddings?</a>. A work in progress.</p>
+<p>Code based on the ICLR 2021 paper <a href="https://arxiv.org/abs/2101.06887">Can a Fruit Fly Learn Word Embeddings?</a>.</p>
+<p>In this work we use a well-established neurobiological network motif from the mushroom body of the fruit fly brain to learn sparse binary word embeddings from raw unstructured text. This package allows the user to access pre-trained word embeddings and generate sparse binary hash codes for individual words.</p>
+<p>Interactive demos of the learned concepts available at <a href="http://flyvec.org">flyvec.org</a>.</p>
 
 </div>
 </div>
@@ -57,7 +59,8 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Basic-Usage">Basic Usage<a class="anchor-link" href="#Basic-Usage"> </a></h3>
+<h3 id="Basic-Usage">Basic Usage<a class="anchor-link" href="#Basic-Usage"> </a></h3><p>An example below illustrates how one can access the binary word embedding for individual tokens for a default hash length <code>k=50</code>.</p>
+
 </div>
 </div>
 </div>
@@ -120,7 +123,8 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Changing-the-Hash-Length">Changing the Hash Length<a class="anchor-link" href="#Changing-the-Hash-Length"> </a></h3>
+<h3 id="Changing-the-Hash-Length">Changing the Hash Length<a class="anchor-link" href="#Changing-the-Hash-Length"> </a></h3><p>The user can obtain the FlyVec embeddings for any hash length using the following example.</p>
+
 </div>
 </div>
 </div>
@@ -165,7 +169,7 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>FlyVec uses a simple, word-based tokenizer with to isolate concepts. The provided model uses a tokenizer with about 20,000 words, all lower-cased, with special tokens for numbers (<code>&lt;NUM&gt;</code>) and unknown words (<code>&lt;UNK&gt;</code>). Unknown tokens have the token id of <code>0</code>, so we can use this to filter unknown tokens.</p>
+<p>FlyVec uses a simple, word-based tokenizer. The provided model uses a vocabulary with about 20,000 words, all lower-cased, with special tokens for numbers (<code>&lt;NUM&gt;</code>) and unknown words (<code>&lt;UNK&gt;</code>). Unknown tokens have the token id of <code>0</code>, which can be used to filter unknown tokens.</p>
 
 </div>
 </div>
@@ -205,7 +209,8 @@ nb_path: "nbs/index.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Batch-generating-word-embeddings">Batch generating word embeddings<a class="anchor-link" href="#Batch-generating-word-embeddings"> </a></h3>
+<h3 id="Batch-generating-word-embeddings">Batch generating word embeddings<a class="anchor-link" href="#Batch-generating-word-embeddings"> </a></h3><p>Embeddings for individual words in a sentence can be obtained using this snippet.</p>
+
 </div>
 </div>
 </div>
@@ -253,7 +258,7 @@ EMBEDDINGS:  [[0 1 0 ... 0 0 0]
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Viewing-the-vocabulary">Viewing the vocabulary<a class="anchor-link" href="#Viewing-the-vocabulary"> </a></h3><p>The vocabulary under the hood uses the gensim <code>Dictionary</code> and can be accessed by either IDs (<code>int</code>s) or Tokens (<code>str</code>s)</p>
+<h3 id="FlyVec-vocabulary">FlyVec vocabulary<a class="anchor-link" href="#FlyVec-vocabulary"> </a></h3><p>The vocabulary under the hood uses the gensim <code>Dictionary</code> and can be accessed by either IDs (<code>int</code>s) or Tokens (<code>str</code>s).</p>
 
 </div>
 </div>
@@ -298,7 +303,7 @@ EMBEDDINGS:  [[0 1 0 ... 0 0 0]
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Training">Training<a class="anchor-link" href="#Training"> </a></h3><p>Please note that training <code>flyvec</code> on your own custom corpus is not currently supported.</p>
+<h3 id="Training">Training<a class="anchor-link" href="#Training"> </a></h3><p>Please note that training <a href="/flyvec/core.html#FlyVec"><code>FlyVec</code></a> on your own custom corpus is not currently supported.</p>
 
 </div>
 </div>
@@ -307,13 +312,12 @@ EMBEDDINGS:  [[0 1 0 ... 0 0 0]
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Citation">Citation<a class="anchor-link" href="#Citation"> </a></h1><p>If you use this in your work, please cite:</p>
 
-<pre><code>@inproceedings{
-liang2021can,
-title={Can a Fruit Fly Learn Word Embeddings?},
-author={Yuchen Liang and Chaitanya Ryali and Benjamin Hoover and Saket Navlakha and Leopold Grinberg and Mohammed J Zaki and Dmitry Krotov},
-booktitle={International Conference on Learning Representations},
-year={2021},
-url={https://openreview.net/forum?id=xfmSoxdxFCG}
+<pre><code>@article{liang2021can,
+  title={Can a Fruit Fly Learn Word Embeddings?},
+  author={Liang, Yuchen and Ryali, Chaitanya K and Hoover, Benjamin and Grinberg, Leopold and Navlakha, Saket and Zaki, Mohammed J and Krotov, Dmitry},
+  journal={arXiv preprint arXiv:2101.06887},
+  year={2021}
+  url={https://arxiv.org/abs/2101.06887}
 }</code></pre>
 
 </div>

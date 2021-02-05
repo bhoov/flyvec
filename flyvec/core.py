@@ -131,7 +131,7 @@ class FlyVec:
         tok_id = self.tokenizer.token2id(tok)
         return tok_id == 0
 
-    def get_sparse_embedding(self, word: str, hash_length: int=32):
+    def get_sparse_embedding(self, word: str, hash_length: int=50):
         """Get a context-independent word embedding for a given word.
         If, when tokenized, the word is composed of multiple tokens, return the embedding of the first.
 
