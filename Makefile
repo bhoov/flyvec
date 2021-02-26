@@ -39,5 +39,8 @@ pypi: dist
 dist: clean
 	python setup.py sdist bdist_wheel
 
+training:
+	cd flyvec/src; bash short_make;
+
 clean:
-	rm -rf dist
+	rm -rf dist; rm flyvec/src/*.o flyvec/src/*.so

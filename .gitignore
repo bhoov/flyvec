@@ -4,6 +4,8 @@ data.zip
 _archive
 _secrets
 data
+*.o
+*.so
 
 # Temp files
 *.bak

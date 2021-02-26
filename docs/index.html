@@ -303,7 +303,25 @@ EMBEDDINGS:  [[0 1 0 ... 0 0 0]
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Training">Training<a class="anchor-link" href="#Training"> </a></h3><p>Please note that training <a href="/flyvec/core.html#FlyVec"><code>FlyVec</code></a> on your own custom corpus is not currently supported.</p>
+<h1 id="Training">Training<a class="anchor-link" href="#Training"> </a></h1><p>Please note that the training code is included, though code for processing the inputs is not. Training <a href="/flyvec/core.html#FlyVec"><code>FlyVec</code></a> on your own custom corpus expecting hurdles.</p>
+<p><strong>Prerequisites</strong></p>
+<p>You need a python environment with <code>numpy</code> installed, a system that supports CUDA, <code>nvcc</code>, and <code>g++</code>.</p>
+<p><strong>Building the Source Files</strong></p>
+<p><code>make training</code></p>
+<p>Note that you will see some warnings. This is expected.</p>
+<p><strong>Training</strong></p>
+<p><code>python train.py path/to/encodings.npy path/to/offsets.npy -o save/checkpoints/in/this/directory</code></p>
+<p><strong>Description of Inputs</strong></p>
+<ul>
+<li><code>encodings.npy</code> -- An <code>np.int32</code> array representing the tokenized vocabulary-IDs of the input corpus, of shape <code>(N,)</code> where <code>N</code> is the number of tokens in the corpus</li>
+<li><code>offsets.npy</code> -- An <code>np.uint64</code> array of shape <code>(C,)</code> where <code>C</code> is the number of chunks in the corpus. Each each value represents the index that starts a new chunk within <code>encodings.npy</code>. 
+  (Chunks can be thought of as sentences or paragraphs within the corpus; boundaries over which the sliding window does not cross.)</li>
+</ul>
+<p><strong>Description of Outputs</strong></p>
+<ul>
+<li><code>model_X.npy</code> -- Stores checkpoints after every epoch within the specified output directory</li>
+</ul>
+<p>See <code>python train.py --help</code> for more options.</p>
 
 </div>
 </div>

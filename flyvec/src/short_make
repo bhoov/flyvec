@@ -1,0 +1,14 @@
+nvcc -c -g -O3 -arch=sm_70 acc_cuda.cu  -shared -Xcompiler -fPIC -rdc=true
+nvcc -c -g -O3 -arch=sm_70 -shared -Xcompiler -fPIC -rdc=true cu_special_reduction.cu
+
+nvcc -g -O3 cuda_helpers.cu -arch=sm_70 -o cuda_helpers.so -shared -Xcompiler -fPIC -rdc=true  -I/usr/local/cuda/include
+
+
+nvcc -g -O3 model_descriptor.cu  -arch=sm_70 -o model_descriptor.so -shared -Xcompiler -fPIC -rdc=true  -I/usr/local/cuda/include  -L/usr/local/cuda/lib64 -lcudadevrt -lcudart -lcuda  -lcublas -lcurand
+
+nvcc -g -O3 model_arrays.cu acc_cuda.o -DUSE_MANAGED  -arch=sm_70 -o model_arrays.so -shared -Xcompiler -fPIC -rdc=true  -lcudadevrt -lcudart -lcuda -lcurand
+
+nvcc -g -O3 cuda_funcs.cu   -arch=sm_70 -o cuda_funcs.so cu_special_reduction.o -shared -Xcompiler -fPIC -rdc=true  -Xcompiler -fopenmp  -I/usr/local/cuda/include  -L/usr/local/cuda/lib64 -lcudadevrt -lcudart -lcuda  -lcublas -lcurand
+
+g++ -g -O3 -fopenmp prune_input.cpp  -shared -fPIC -o prune_input.so -I/usr/local/cuda/include
+
