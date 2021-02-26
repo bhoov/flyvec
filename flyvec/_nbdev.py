@@ -22,7 +22,8 @@ index = {"softmax": "00_core.ipynb",
          "unzip_data": "02_Download Helpers.ipynb",
          "prepare_flyvec_data": "02_Download Helpers.ipynb",
          "BIN": "03_Train Flyvec.ipynb",
-         "init": "03_Train Flyvec.ipynb"}
+         "init": "03_Train Flyvec.ipynb",
+         "main": "03_Train Flyvec.ipynb"}
 
 modules = ["core.py",
            "tokenizer.py",

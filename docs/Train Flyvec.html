@@ -84,249 +84,30 @@ nb_path: "nbs/03_Train Flyvec.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nd">@call_parse</span>
-<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
-    <span class="n">encodings_source</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Path to the tokens encoded as an ID. (eltype should be np.int32)&quot;&quot;&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">),</span>
-    <span class="n">offsets_source</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Path to the offsets array indicating where each value of the array indicates where a chunk of text should start. (eltype should be np.uint64, first value should be 0)&quot;&quot;&quot;</span><span class="p">,</span><span class="nb">str</span><span class="p">),</span>
-    <span class="n">output_dir</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Directory in which to save the checkpoints. Created if it does not exist&quot;&quot;&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">,</span>
-    <span class="n">save_every</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;How many epochs to run before saving a checkpoint&quot;&quot;&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">ckpt_prefix</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Prefix to name each checkpoint. Additional parameter choices are inserted into the checkpoint name.&quot;&quot;&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span><span class="o">=</span><span class="s2">&quot;flyvec_model&quot;</span><span class="p">,</span>
-    <span class="n">starting_checkpoint</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Path to .npy file of saved checkpoint&quot;&quot;&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="n">W</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;Size of the W-gram sliding window used to train the word vectors&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
-    <span class="n">hid</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;Number of hidden units (neurons). Do not change&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span>
-    <span class="n">initial_learning_rate</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;Initial learning rate&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span><span class="o">=</span><span class="mf">0.002</span><span class="p">,</span>
-    <span class="n">delta</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;From equation&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
-    <span class="n">mu</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;If no checkpoint provided, use this as mean for random normal initialization of synapses&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span>
-    <span class="n">sigma</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;If no checkpoint provided, use this as stdev for random normal initialization of synapses&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
-    <span class="n">Nep</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;Maximum number of epochs, fewer if starting from a checkpoint&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
-    <span class="n">batch_size</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;Minibatch size&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span>
-    <span class="n">prec</span><span class="p">:</span><span class="n">Param</span><span class="p">(</span><span class="s2">&quot;Precision, avoid dividing by 0&quot;</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span><span class="o">=</span><span class="mf">1.0E-30</span><span class="p">,</span>
-<span class="p">):</span>
+<div class="output_wrapper">
+<div class="output">
 
-    <span class="c1"># Obsolete Parameters</span>
-    <span class="n">stride</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">IM_HEIGHT</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">IM_WIDTH</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
-    <span class="n">Nchannels</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="output_area">
 
-    <span class="c1"># Unexposed Parameters</span>
-    <span class="n">frequency_scaling</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 1 or 0, true or false</span>
-    <span class="n">Lmid</span> <span class="o">=</span> <span class="mf">1.0</span>
-    <span class="n">Lbase</span> <span class="o">=</span> <span class="mf">1.0</span>
-    <span class="n">sparse_input</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 1 or 0, true or false, make input sparse and only store column</span>
 
-    <span class="c1"># Load object files</span>
-    <span class="n">model_descriptor</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;model_descriptor.so&#39;</span><span class="p">))</span>
-    <span class="n">model_arrays</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;model_arrays.so&#39;</span><span class="p">))</span>
-    <span class="n">cuda_helpers</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;cuda_helpers.so&#39;</span><span class="p">))</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;cuda_funcs.so&#39;</span><span class="p">))</span>
-    <span class="n">prune_input</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;prune_input.so&#39;</span><span class="p">))</span>
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="main" class="doc_header"><code>main</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/train_flyvec.py#L30" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>main</code>(<strong><code>encodings_source</code></strong>:"Path to the tokens encoded as an ID. (eltype should be np.int32)", <strong><code>offsets_source</code></strong>:"Path to the offsets array indicating where each value of the array indicates where a chunk of text should start. (eltype should be np.uint64, first value should be 0)", <strong><code>output_dir</code></strong>:"Directory in which to save the checkpoints. Created if it does not exist"=<em><code>'.'</code></em>, <strong><code>save_every</code></strong>:"How many epochs to run before saving a checkpoint"=<em><code>1</code></em>, <strong><code>ckpt_prefix</code></strong>:"Prefix to name each checkpoint. Additional parameter choices are inserted into the checkpoint name."=<em><code>'flyvec_model'</code></em>, <strong><code>starting_checkpoint</code></strong>:"Path to .npy file of saved checkpoint"=<em><code>None</code></em>, <strong><code>W</code></strong>:"Size of the W-gram sliding window used to train the word vectors"=<em><code>11</code></em>, <strong><code>hid</code></strong>:"Number of hidden units (neurons). Do not change"=<em><code>400</code></em>, <strong><code>initial_learning_rate</code></strong>:"Initial learning rate"=<em><code>0.002</code></em>, <strong><code>delta</code></strong>:"From equation"=<em><code>0.0</code></em>, <strong><code>mu</code></strong>:"If no checkpoint provided, use this as mean for random normal initialization of synapses"=<em><code>0.0</code></em>, <strong><code>sigma</code></strong>:"If no checkpoint provided, use this as stdev for random normal initialization of synapses"=<em><code>0.02</code></em>, <strong><code>Nep</code></strong>:"Maximum number of epochs, fewer if starting from a checkpoint"=<em><code>15</code></em>, <strong><code>batch_size</code></strong>:"Minibatch size"=<em><code>10000</code></em>, <strong><code>prec</code></strong>:"Precision, avoid dividing by 0"=<em><code>1e-30</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
     
-    <span class="c1"># m = 2</span>
-    <span class="c1"># p = 2</span>
-    <span class="c1"># parser.add_argument(&quot;--stride&quot;, default=1, type=int, help=&quot;Stride. Do not change.&quot;)</span>
-    <span class="c1"># parser.add_argument(&quot;--IM_HEIGHT&quot;, default=1, type=int, help=&quot;Height of the image data. Obsolete.&quot;)</span>
-    <span class="c1"># parser.add_argument(&quot;--IM_WIDTH&quot;, default=11, type=int, help=&quot;Width of the image data. Obsolete.&quot;)</span>
-    <span class="c1"># parser.add_argument(&quot;--Nchannels&quot;, default=1, type=int, help=&quot;Number of channels in the image data. Obsolete.&quot;)</span>
-    <span class="c1"># parser.add_argument(&quot;--m&quot;, default=2, type=int, help=&quot;Parameter from equation. Obsolete.&quot;)</span>
-    <span class="c1"># parser.add_argument(&quot;--p&quot;, default=2, type=int, help=&quot;Parameter from equation. Obsolete.&quot;)</span>
-
-
-    <span class="c1"># Assign values to memory</span>
-    <span class="n">py_prune_input_data</span> <span class="o">=</span> <span class="n">prune_input</span><span class="o">.</span><span class="n">prune_input_data</span>
-    <span class="n">py_prune_input_data</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">]</span>
-
-    <span class="n">py_getnum_samples</span> <span class="o">=</span> <span class="n">prune_input</span><span class="o">.</span><span class="n">getnum_samples</span>
-    <span class="n">py_getnum_samples</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">]</span>
-    <span class="n">py_getnum_samples</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">c_uint64</span>
-
-    <span class="n">py_compute_offset_phrases</span> <span class="o">=</span> <span class="n">prune_input</span><span class="o">.</span><span class="n">compute_offset_phrases</span>
-    <span class="n">py_compute_offset_phrases</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span> <span class="n">c_void_p</span><span class="p">,</span> <span class="n">c_uint64</span><span class="p">,</span> <span class="n">c_uint64</span><span class="p">]</span>
-
-    <span class="n">py_model_create_descriptor</span> <span class="o">=</span> <span class="n">model_descriptor</span><span class="o">.</span><span class="n">model_create_descriptor</span>
-    <span class="n">py_model_create_descriptor</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_int32</span><span class="p">]</span>
-    <span class="n">py_model_create_descriptor</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
-
-    <span class="n">py_set_model_param_int</span> <span class="o">=</span> <span class="n">model_descriptor</span><span class="o">.</span><span class="n">set_model_param_int</span>
-    <span class="n">py_set_model_param_float</span> <span class="o">=</span> <span class="n">model_descriptor</span><span class="o">.</span><span class="n">set_model_param_float</span>
-    <span class="n">py_compute_model_derived_parameters</span> <span class="o">=</span> <span class="n">model_descriptor</span><span class="o">.</span><span class="n">compute_model_derived_parameters</span>
-
-    <span class="n">py_set_model_param_int</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_uint64</span><span class="p">,</span><span class="n">c_char_p</span><span class="p">,</span><span class="n">c_void_p</span><span class="p">]</span>
-    <span class="n">py_set_model_param_float</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_float</span><span class="p">,</span><span class="n">c_char_p</span><span class="p">,</span><span class="n">c_void_p</span><span class="p">]</span>
-
-    <span class="n">py_compute_model_derived_parameters</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">]</span>
-
-    <span class="n">py_copy_model_params</span> <span class="o">=</span> <span class="n">model_descriptor</span><span class="o">.</span><span class="n">copy_model_params</span>
-    <span class="n">py_copy_model_params</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_int32</span><span class="p">,</span><span class="n">c_int32</span><span class="p">]</span>
-
-
-    <span class="n">py_model_create_arrays</span> <span class="o">=</span> <span class="n">model_arrays</span><span class="o">.</span><span class="n">model_create_arrays</span>
-    <span class="n">py_model_create_arrays</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
-    <span class="n">py_model_create_arrays</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_int32</span><span class="p">]</span>
-
-    <span class="n">py_model_arrays_allocate_memory</span> <span class="o">=</span> <span class="n">model_arrays</span><span class="o">.</span><span class="n">model_arrays_allocate_memory</span>
-    <span class="n">py_model_arrays_allocate_memory</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_int32</span><span class="p">]</span>
-
-
-    <span class="n">py_model_arrays_reshuffle_indices</span> <span class="o">=</span> <span class="n">model_arrays</span><span class="o">.</span><span class="n">do_reshuffle_indices</span>
-    <span class="n">py_model_arrays_reshuffle_indices</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_int32</span><span class="p">]</span>
-
-    <span class="n">py_compute_inverse_word_frequency</span> <span class="o">=</span> <span class="n">model_arrays</span><span class="o">.</span><span class="n">compute_inverse_word_frequency</span>
-    <span class="n">py_compute_inverse_word_frequency</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">,</span><span class="n">c_int32</span><span class="p">]</span>
-
-    <span class="n">python_get_cuda_pinned_memory</span> <span class="o">=</span> <span class="n">cuda_helpers</span><span class="o">.</span><span class="n">do_gpu_cudaHostAlloc</span>
-    <span class="n">python_get_cuda_pinned_memory</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
-
-    <span class="n">python_get_cuda_managed_memory</span> <span class="o">=</span> <span class="n">cuda_helpers</span><span class="o">.</span><span class="n">do_gpu_cudaMallocManaged</span>
-    <span class="n">python_get_cuda_managed_memory</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
-
-
-    <span class="n">py_run_epoch_INPUT_AS_IMAGE</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">launch_epoch_INPUT_AS_IMAGE</span>
-    <span class="n">py_run_epoch_INPUT_AS_IMAGE</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_int32</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">]</span>
-
-    <span class="n">py_run_epoch_INPUT_AS_FLOAT</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">launch_epoch_INPUT_AS_FLOAT</span>
-    <span class="n">py_run_epoch_INPUT_AS_FLOAT</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_int32</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">]</span>
-
-
-    <span class="n">py_run_epoch_INPUT_AS_INT</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">launch_epoch_INPUT_AS_INT</span>
-    <span class="n">py_run_epoch_INPUT_AS_INT</span><span class="o">.</span><span class="n">rgtypes</span><span class="o">=</span><span class="p">[</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_void_p</span><span class="p">,</span><span class="n">c_int32</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">,</span><span class="n">c_uint64</span><span class="p">]</span>
-
-    <span class="n">py_model_arrays_get_data_pointer</span> <span class="o">=</span> <span class="n">model_arrays</span><span class="o">.</span><span class="n">get_data_pointer</span>
-    <span class="n">py_model_arrays_get_data_pointer</span><span class="o">.</span><span class="n">restype</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span>
-    <span class="n">py_model_arrays_get_data_pointer</span><span class="o">.</span><span class="n">rgtypes</span> <span class="o">=</span> <span class="p">[</span><span class="n">c_char_p</span><span class="p">,</span> <span class="n">c_void_p</span><span class="p">,</span> <span class="n">c_int32</span><span class="p">]</span>
-
-    <span class="n">num_gpus</span> <span class="o">=</span> <span class="n">cuda_helpers</span><span class="o">.</span><span class="n">get_cuda_num_devices</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;num_gpus=&#39;</span><span class="p">,</span> <span class="n">num_gpus</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;py_model_create_arrays and descriptor...&quot;</span><span class="p">)</span>
-    <span class="n">MODEL_DSCR</span> <span class="o">=</span> <span class="n">py_model_create_descriptor</span><span class="p">(</span> <span class="n">c_int32</span><span class="p">(</span><span class="n">num_gpus</span><span class="p">)</span> <span class="p">)</span>
-    <span class="n">MODEL_DATA</span> <span class="o">=</span> <span class="n">py_model_create_arrays</span><span class="p">(</span> <span class="n">c_int32</span><span class="p">(</span><span class="n">num_gpus</span><span class="p">)</span> <span class="p">)</span>
-
-    <span class="c1"># Create output directory</span>
-    <span class="n">output_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">output_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span> <span class="n">output_dir</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">OUTPUT_NAME</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ckpt_prefix</span><span class="si">}</span><span class="s2">_H_</span><span class="si">{</span><span class="n">hid</span><span class="si">}</span><span class="s2">_W_</span><span class="si">{</span><span class="n">W</span><span class="si">}</span><span class="s2">_LR_</span><span class="si">{</span><span class="n">initial_learning_rate</span><span class="si">}</span><span class="s2">_&quot;</span>
-    <span class="n">OUTPUT</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">output_dir</span> <span class="o">/</span> <span class="n">OUTPUT_NAME</span><span class="p">)</span>
-
-    <span class="c1"># Allocate memory for initial encodings</span>
-    <span class="n">input_data_on_disk_encoding</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">encodings_source</span><span class="p">,</span> <span class="n">mmap_mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-    <span class="n">Ns_1</span> <span class="o">=</span> <span class="n">input_data_on_disk_encoding</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-    <span class="c1"># Cannot push to GPU</span>
-    <span class="n">INPUT</span> <span class="o">=</span> <span class="n">python_get_cuda_pinned_memory</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">(</span><span class="n">Ns_1</span><span class="o">*</span><span class="n">ctypes</span><span class="o">.</span><span class="n">sizeof</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">)))</span>
-
-    <span class="c1">#create numpy array to store input data, use memory allocated for INPUT</span>
-    <span class="n">INPUT_data_pointer</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">INPUT</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int32</span><span class="p">))</span>
-    <span class="n">INPUT_np_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ctypeslib</span><span class="o">.</span><span class="n">as_array</span><span class="p">(</span><span class="n">INPUT_data_pointer</span><span class="p">,</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Ns_1</span><span class="p">,))</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Copying input...&#39;</span><span class="p">)</span>
-    <span class="n">numpy</span><span class="o">.</span><span class="n">copyto</span><span class="p">(</span><span class="n">INPUT_np_array</span><span class="p">,</span><span class="n">input_data_on_disk_encoding</span><span class="p">)</span>
-
-    <span class="n">vocabulary_size</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">uint64</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">INPUT_np_array</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">N</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">uint64</span><span class="p">(</span><span class="n">vocabulary_size</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Determined a vocabulary size of </span><span class="si">{</span><span class="n">vocabulary_size</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="n">input_data_on_disk_offsets</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">offsets_source</span><span class="p">,</span><span class="n">mmap_mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-    <span class="n">Number_of_sentences</span> <span class="o">=</span> <span class="n">input_data_on_disk_offsets</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span>
-
-    <span class="n">Number_of_phrases</span> <span class="o">=</span> <span class="n">prune_input</span><span class="o">.</span><span class="n">getnum_samples</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">input_data_on_disk_offsets</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
-            <span class="n">c_uint64</span><span class="p">(</span><span class="n">Number_of_sentences</span><span class="p">),</span> <span class="n">c_uint64</span><span class="p">(</span><span class="n">W</span><span class="p">)</span> <span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of phrases: &#39;</span><span class="p">,</span> <span class="n">Number_of_phrases</span><span class="p">)</span>
-
-    <span class="c1">#allocate memory for offsets for phrases of size W</span>
-    <span class="n">INPUT_phrases_offsets</span> <span class="o">=</span> <span class="n">python_get_cuda_pinned_memory</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">((</span><span class="n">Number_of_phrases</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">ctypes</span><span class="o">.</span><span class="n">sizeof</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_int64</span><span class="p">)</span> <span class="p">))</span>
-
-    <span class="c1">#compute offsets</span>
-    <span class="n">py_compute_offset_phrases</span><span class="p">(</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">INPUT_phrases_offsets</span><span class="p">),</span>
-            <span class="n">c_void_p</span><span class="p">(</span><span class="n">input_data_on_disk_offsets</span><span class="o">.</span><span class="n">__array_interface__</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span> <span class="n">c_uint64</span><span class="p">(</span><span class="n">Number_of_sentences</span><span class="p">),</span>
-            <span class="n">c_uint64</span><span class="p">(</span><span class="n">W</span><span class="p">))</span>
-
-    <span class="n">Ns_1</span> <span class="o">=</span> <span class="n">Number_of_phrases</span>
-
-    <span class="n">model_descriptor</span><span class="o">.</span><span class="n">print_model_params</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">IM_HEIGHT</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;IM_HEIGHT&#39;</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">IM_WIDTH</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;IM_WIDTH&#39;</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">Nchannels</span><span class="p">,</span><span class="sa">b</span><span class="s1">&#39;Nchannels&#39;</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_uint64</span><span class="p">(</span><span class="n">Ns_1</span><span class="p">),</span><span class="sa">b</span><span class="s1">&#39;Ns_1&#39;</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="c1">#</span>
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">stride</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;ST&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">hid</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;hid&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;Num&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">c_uint64</span><span class="p">(</span><span class="n">vocabulary_size</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;vocabulary_size&#39;</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">sparse_input</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;sparse_input&#39;</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_int</span><span class="p">(</span><span class="n">frequency_scaling</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;frequency_scaling&#39;</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-
-    <span class="n">py_set_model_param_float</span><span class="p">(</span><span class="n">c_float</span><span class="p">(</span><span class="n">initial_learning_rate</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;initial_learning_rate&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_float</span><span class="p">(</span><span class="n">c_float</span><span class="p">(</span><span class="n">delta</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;delta&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_float</span><span class="p">(</span><span class="n">c_float</span><span class="p">(</span><span class="n">prec</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;prec&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_float</span><span class="p">(</span><span class="n">c_float</span><span class="p">(</span><span class="n">mu</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_float</span><span class="p">(</span><span class="n">c_float</span><span class="p">(</span><span class="n">sigma</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;sigma&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_float</span><span class="p">(</span><span class="n">c_float</span><span class="p">(</span><span class="n">Lmid</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;Lmid&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_set_model_param_float</span><span class="p">(</span><span class="n">c_float</span><span class="p">(</span><span class="n">Lbase</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;Lbase&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-    <span class="n">py_compute_model_derived_parameters</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-
-    <span class="k">for</span> <span class="n">gpu</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">num_gpus</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">py_copy_model_params</span><span class="p">(</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">),</span> <span class="n">c_int32</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">c_int32</span><span class="p">(</span><span class="n">gpu</span><span class="p">)</span> <span class="p">)</span>
-
-    <span class="n">model_descriptor</span><span class="o">.</span><span class="n">print_model_params</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">))</span>
-
-    <span class="n">py_model_arrays_allocate_memory</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DATA</span><span class="p">),</span><span class="n">c_int32</span><span class="p">(</span><span class="n">num_gpus</span><span class="p">))</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;setting INPUT pointer&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">gpu</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_gpus</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">model_arrays</span><span class="o">.</span><span class="n">set_up_INPUT_pointer</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;INPUT&#39;</span><span class="p">,</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DATA</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">INPUT</span><span class="p">),</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">INPUT_phrases_offsets</span><span class="p">),</span> <span class="sa">b</span><span class="s1">&#39;i4&#39;</span><span class="p">,</span><span class="n">c_int32</span><span class="p">(</span><span class="n">gpu</span><span class="p">))</span>
-
-    <span class="k">if</span> <span class="n">frequency_scaling</span><span class="o">==</span><span class="mi">1</span> <span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing inverse word frequency...&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">gpu</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_gpus</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">py_compute_inverse_word_frequency</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DATA</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">INPUT</span><span class="p">),</span> <span class="n">c_uint64</span><span class="p">(</span><span class="n">input_data_on_disk_encoding</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>  <span class="n">c_int32</span><span class="p">(</span><span class="n">gpu</span><span class="p">)</span> <span class="p">)</span>
-
-    <span class="c1">#model_arrays.push_INPUT_memory_to_GPU(ctypes.c_void_p(MODEL_DATA), ctypes.c_void_p(MODEL_DSCR),c_int32(0), b&#39;i4&#39;)</span>
-
-    <span class="c1">#initialize SYNAPSES</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Setting initial weights...&#39;</span><span class="p">)</span>
-    <span class="n">epoch_start</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">starting_checkpoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">R</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">starting_checkpoint</span><span class="p">,</span><span class="n">mmap_mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-        <span class="c1"># Assume that the epoch_starting_number is the last value of the checkpoint name</span>
-        <span class="n">epoch_start</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">starting_checkpoint</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">R</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="p">(</span><span class="n">hid</span><span class="p">,</span><span class="n">N</span><span class="p">)))</span>
-
-    <span class="c1">#push the same initial model data into all GPUs</span>
-    <span class="k">for</span> <span class="n">gpu</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">num_gpus</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">SYNAPSES_data_pointer</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">py_model_arrays_get_data_pointer</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;synapses&#39;</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DATA</span><span class="p">),</span><span class="n">c_int32</span><span class="p">(</span><span class="n">gpu</span><span class="p">)),</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_float</span><span class="p">))</span>
-        <span class="n">SYNAPSES_np_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ctypeslib</span><span class="o">.</span><span class="n">as_array</span><span class="p">(</span><span class="n">SYNAPSES_data_pointer</span><span class="p">,</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">hid</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
-        <span class="n">numpy</span><span class="o">.</span><span class="n">copyto</span><span class="p">(</span><span class="n">SYNAPSES_np_array</span><span class="p">,</span><span class="n">R</span><span class="p">)</span>
-
-    <span class="n">SYNAPSES_data_pointer</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">cast</span><span class="p">(</span><span class="n">py_model_arrays_get_data_pointer</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;synapses&#39;</span><span class="p">,</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DATA</span><span class="p">),</span><span class="n">c_int32</span><span class="p">(</span><span class="mi">0</span><span class="p">)),</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_float</span><span class="p">))</span>
-    <span class="n">SYNAPSES_np_array</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ctypeslib</span><span class="o">.</span><span class="n">as_array</span><span class="p">(</span><span class="n">SYNAPSES_data_pointer</span><span class="p">,</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">hid</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
-
-    <span class="c1">#push INPUT data to the GPU (depending on available memory)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ep</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">epoch_start</span><span class="p">,</span><span class="n">Nep</span><span class="p">)):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;epoch ID = &#39;</span><span class="p">,</span><span class="n">ep</span><span class="p">)</span>
-        <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="n">py_model_arrays_reshuffle_indices</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DATA</span><span class="p">),</span><span class="n">c_int32</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-        <span class="n">t11</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="n">py_run_epoch_INPUT_AS_INT</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DSCR</span><span class="p">),</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">c_void_p</span><span class="p">(</span><span class="n">MODEL_DATA</span><span class="p">),</span> <span class="n">c_int32</span><span class="p">(</span><span class="n">num_gpus</span><span class="p">),</span>
-                <span class="n">c_uint64</span><span class="p">(</span><span class="n">ep</span><span class="p">),</span> <span class="n">c_uint64</span><span class="p">(</span><span class="n">Nep</span><span class="p">)</span> <span class="p">)</span>
-        <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;time per epoch = &#39;</span><span class="p">,</span><span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="p">,</span><span class="s1">&#39;[s]&#39;</span><span class="p">,</span> <span class="s1">&#39;  py_model_arrays_reshuffle_indices time = &#39;</span><span class="p">,</span><span class="n">t11</span><span class="o">-</span><span class="n">t1</span><span class="p">,</span><span class="s1">&#39;[s]&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">save_every</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">i</span> <span class="o">==</span> <span class="p">(</span><span class="n">Nep</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-            <span class="n">numpy</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">OUTPUT</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">ep</span><span class="p">),</span><span class="n">SYNAPSES_np_array</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
