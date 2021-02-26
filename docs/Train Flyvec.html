@@ -61,7 +61,7 @@ nb_path: "nbs/03_Train Flyvec.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="init" class="doc_header"><code>init</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/train_flyvec.py#L31" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init</code>()</p>
+<h4 id="init" class="doc_header"><code>init</code><a href="https://github.com/bhoov/flyvec/tree/master/flyvec/train_flyvec.py#L26" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>init</code>()</p>
 </blockquote>
 
 </div>
@@ -119,6 +119,13 @@ nb_path: "nbs/03_Train Flyvec.ipynb"
     <span class="n">Lbase</span> <span class="o">=</span> <span class="mf">1.0</span>
     <span class="n">sparse_input</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 1 or 0, true or false, make input sparse and only store column</span>
 
+    <span class="c1"># Load object files</span>
+    <span class="n">model_descriptor</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;model_descriptor.so&#39;</span><span class="p">))</span>
+    <span class="n">model_arrays</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;model_arrays.so&#39;</span><span class="p">))</span>
+    <span class="n">cuda_helpers</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;cuda_helpers.so&#39;</span><span class="p">))</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;cuda_funcs.so&#39;</span><span class="p">))</span>
+    <span class="n">prune_input</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">BIN</span> <span class="o">/</span> <span class="s1">&#39;prune_input.so&#39;</span><span class="p">))</span>
+    
     <span class="c1"># m = 2</span>
     <span class="c1"># p = 2</span>
     <span class="c1"># parser.add_argument(&quot;--stride&quot;, default=1, type=int, help=&quot;Stride. Do not change.&quot;)</span>

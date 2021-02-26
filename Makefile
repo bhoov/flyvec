@@ -43,4 +43,7 @@ training:
 	cd flyvec/src; bash short_make;
 
 clean:
-	rm -rf dist; rm flyvec/src/*.o flyvec/src/*.so
+	rm -rf dist
+
+clean_cu:
+	rm flyvec/src/*.o flyvec/src/*.so
