@@ -8,11 +8,21 @@ In this work we use a well-established neurobiological network motif from the mu
 
 Interactive demos of the learned concepts available at [flyvec.org](http://flyvec.org).
 
-## Install
+## How to use
+
+### Install from Pip (recommended)
 
 `pip install flyvec`
 
-## How to use
+### Installing from Source
+
+After cloning:
+
+```
+conda env create -f environment-dev.yml
+conda activate flyvec
+pip install -e .
+```
 
 ### Basic Usage
 An example below illustrates how one can access the binary word embedding for individual tokens for a default hash length `k=50`. 
@@ -121,7 +131,7 @@ model.dictionary;
 
 # Training
 
-Please note that the training code is included, though code for processing the inputs is not. Training `FlyVec` on your own custom corpus expecting hurdles. 
+Please note that the training code is included, though code for processing the inputs.
 
 **Prerequisites**
 
@@ -129,13 +139,15 @@ You need a python environment with `numpy` installed, a system that supports CUD
 
 **Building the Source Files**
 
-`make training`
+`flyvec_compile`
+
+(Or, if using from source, you can also run `make training`)
 
 Note that you will see some warnings. This is expected.
 
 **Training**
 
-`python train.py path/to/encodings.npy path/to/offsets.npy -o save/checkpoints/in/this/directory`
+`flyvec_train path/to/encodings.npy path/to/offsets.npy -o save/checkpoints/in/this/directory`
 
 **Description of Inputs**
 
@@ -147,7 +159,7 @@ Note that you will see some warnings. This is expected.
 
 - `model_X.npy` -- Stores checkpoints after every epoch within the specified output directory
 
-See `python train.py --help` for more options.
+See `flyvec_train --help` for more options.
 
 # Citation
 

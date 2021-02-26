@@ -1,6 +1,7 @@
 # Project choices
 test_dvc.txt
 data.zip
+*.zip
 _archive
 _secrets
 data

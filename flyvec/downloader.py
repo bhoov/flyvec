@@ -25,6 +25,13 @@ def download_flyvec_data(outfile=None, force=False):
 
     """
     tmp_file = Path(outfile) if outfile is not None else Path(tempfile.gettempdir()) / "flyvec-data.zip"
+    try:
+        fd = open(str(tmp_file), 'wb')
+    except PermissionError as pe:
+        print(f"{pe}. Downloading to current working directory.")
+        tmp_file = Path("flyvec-data.zip")
+        fd = open(str(tmp_file), 'wb')
+
     if tmp_file.exists() and not force:
         print(f"Found existing {tmp_file}, reusing")
         return tmp_file
@@ -45,9 +52,9 @@ def download_flyvec_data(outfile=None, force=False):
     def download_progress(chunk):
         down_progress.update(down_progress.currval + chunk)
 
-    with open(str(tmp_file), 'wb') as fd:
-        obj.download_fileobj(fd, Callback=download_progress)
+    obj.download_fileobj(fd, Callback=download_progress)
 
+    fd.close()
     down_progress.finish()
 
     return tmp_file

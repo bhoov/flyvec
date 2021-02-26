@@ -20,11 +20,19 @@ index = {"softmax": "00_core.ipynb",
          "get_model_dir": "02_Download Helpers.ipynb",
          "download_flyvec_data": "02_Download Helpers.ipynb",
          "unzip_data": "02_Download Helpers.ipynb",
-         "prepare_flyvec_data": "02_Download Helpers.ipynb"}
+         "prepare_flyvec_data": "02_Download Helpers.ipynb",
+         "BIN": "03_Train Flyvec.ipynb",
+         "model_descriptor": "03_Train Flyvec.ipynb",
+         "model_arrays": "03_Train Flyvec.ipynb",
+         "cuda_helpers": "03_Train Flyvec.ipynb",
+         "model": "03_Train Flyvec.ipynb",
+         "prune_input": "03_Train Flyvec.ipynb",
+         "init": "03_Train Flyvec.ipynb"}
 
 modules = ["core.py",
            "tokenizer.py",
-           "downloader.py"]
+           "downloader.py",
+           "train_flyvec.py"]
 
 doc_url = "https://bhoov.github.io/flyvec/"
 

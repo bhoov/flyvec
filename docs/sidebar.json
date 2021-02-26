@@ -3,6 +3,7 @@
     "Overview": "/",
     "FlyVec": "core.html",
     "Tokenizer": "Tokenizer.html",
-    "Downloading the data": "Download Helpers.html"
+    "Downloading the data": "Download Helpers.html",
+    "Training FlyVec": "Train Flyvec.html"
   }
 }

@@ -18,6 +18,9 @@ entries:
     - output: web,pdf
       title: Downloading the data
       url: Download Helpers.html
+    - output: web,pdf
+      title: Training FlyVec
+      url: Train Flyvec.html
     output: web
     title: flyvec
   output: web

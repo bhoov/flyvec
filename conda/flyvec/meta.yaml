@@ -1,0 +1,48 @@
+package:
+  name: flyvec
+  version: 0.2.2
+source:
+  sha256: d2e7cd8f32d8ceed7405a133ff62b191339098fd1ce86669984203a9e16c3378
+  url: https://files.pythonhosted.org/packages/e8/47/d853b1edd47c57ca4f2e58cb25a54cd24853c691236c8614789d4acc7ae8/flyvec-0.2.2.tar.gz
+about:
+  dev_url: https://bhoov.github.io
+  doc_url: https://bhoov.github.io
+  home: https://bhoov.github.io
+  license: Apache Software
+  license_family: APACHE
+  summary: A biologically inspired method to create sparse, binary word vectors
+build:
+  noarch: python
+  number: '0'
+  script: '{{ PYTHON }} -m pip install . -vv'
+extra:
+  recipe-maintainers:
+  - bhoov
+requirements:
+  host:
+  - pip
+  - python
+  - packaging
+  - numpy>=1.5.0
+  - gensim
+  - regex
+  - boto3
+  - cached-property
+  - progressbar
+  - fastcore
+  - pyyaml
+  run:
+  - pip
+  - python
+  - packaging
+  - numpy>=1.5.0
+  - gensim
+  - regex
+  - boto3
+  - cached-property
+  - progressbar
+  - fastcore
+  - pyyaml
+test:
+  imports:
+  - flyvec
