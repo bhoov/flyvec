@@ -21,6 +21,9 @@ entries:
     - output: web,pdf
       title: Training FlyVec
       url: Train Flyvec.html
+    - output: web,pdf
+      title: Delegation
+      url: utils.html
     output: web
     title: flyvec
   output: web

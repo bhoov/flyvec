@@ -4,6 +4,7 @@
     "FlyVec": "core.html",
     "Tokenizer": "Tokenizer.html",
     "Downloading the data": "Download Helpers.html",
-    "Training FlyVec": "Train Flyvec.html"
+    "Training FlyVec": "Train Flyvec.html",
+    "Delegation": "utils.html"
   }
 }

@@ -23,12 +23,14 @@ index = {"softmax": "00_core.ipynb",
          "prepare_flyvec_data": "02_Download Helpers.ipynb",
          "BIN": "03_Train Flyvec.ipynb",
          "init": "03_Train Flyvec.ipynb",
-         "main": "03_Train Flyvec.ipynb"}
+         "main": "03_Train Flyvec.ipynb",
+         "delegates": "04_utils.ipynb"}
 
 modules = ["core.py",
            "tokenizer.py",
            "downloader.py",
-           "train_flyvec.py"]
+           "train_flyvec.py",
+           "utils.py"]
 
 doc_url = "https://bhoov.github.io/flyvec/"
 

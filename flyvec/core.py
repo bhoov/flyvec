@@ -107,9 +107,14 @@ class FlyVec:
     def n_vocab(self): return self.tokenizer.n_vocab()
 
     @cached_property
+    def stop_word_ids(self):
+        """Token IDs the model should not respond to"""
+        return set(np.load(self.stopword_file))
+
+    @cached_property
     def stop_words(self):
         """Words the model should not respond to"""
-        return set(np.load(self.stopword_file))
+        return set([self.tokenizer.id2token(t) for t in self.stop_word_ids])
 
     @cached_property
     def unknown_embedding_info(self):
@@ -178,3 +183,29 @@ class FlyVec:
             "id": tok_id,
             "embedding": activation_scores
         }
+
+    def simple_word_vectors(self, k:int=50, exclude_stop_words=False, output_list=False)->Dict[str, np.array]:
+        """Collect all the context-independent word embeddings for an arbitrary `k` hash length
+
+        Args:
+            k: Desired hash length
+            exclude_stop_words: If True, exclude from the output dictionary the word vectors for stop words in the vocab
+
+        Returns:
+            Dictionary of token -> word embedding
+        """
+
+        def parse_vector(a):
+            """Turn into list or no?"""
+            if output_list: return list(a)
+            return a
+
+        out = {}
+        for t in self.token_vocab:
+            if exclude_stop_words and (t in self.stop_words):
+                continue
+            try:
+                out[t] = parse_vector(self.get_sparse_embedding(t, hash_length=k)['embedding'])
+            except Exception as e:
+                print(f"Invalid token: `{t}`. Continuing.\nOriginal Error:\n\n {e}")
+        return out
