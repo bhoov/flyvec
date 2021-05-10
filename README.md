@@ -169,12 +169,29 @@ Note that you will see some warnings. This is expected.
 
 See `flyvec_train --help` for more options.
 
+# Debugging tips
+
+### **BadZipFile**
+
+You see:
+```
+> >> File "/usr/lib/python3.6/zipfile.py", line 1198, in _RealGetContents
+>>>    raise BadZipFile("File is not a zip file")
+>>> zipfile.BadZipFile:File is not a zip file```
+
+Run:
+
+```
+>>> from flyvec import FlyVec
+>>> FlyVec.load(force_redownload=True)
+```
+
 # Citation
 
 If you use this in your work, please cite:
 
 ```
-@article{liang2021can,
+@article{liang2021flyvec,
   title={Can a Fruit Fly Learn Word Embeddings?},
   author={Liang, Yuchen and Ryali, Chaitanya K and Hoover, Benjamin and Grinberg, Leopold and Navlakha, Saket and Zaki, Mohammed J and Krotov, Dmitry},
   journal={arXiv preprint arXiv:2101.06887},

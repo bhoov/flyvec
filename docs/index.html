@@ -349,9 +349,30 @@ EMBEDDINGS:  [[0 1 0 ... 0 0 0]
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Debugging-tips">Debugging tips<a class="anchor-link" href="#Debugging-tips"> </a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="BadZipFile"><strong>BadZipFile</strong><a class="anchor-link" href="#BadZipFile"> </a></h3><p>You see:</p>
+
+<pre><code>&gt; &gt;&gt; File "/usr/lib/python3.6/zipfile.py", line 1198, in _RealGetContents
+&gt;&gt;&gt;    raise BadZipFile("File is not a zip file")
+&gt;&gt;&gt; zipfile.BadZipFile:File is not a zip file</code></pre>
+<p>Run:</p>
+
+<pre><code>&gt;&gt;&gt; from flyvec import FlyVec
+&gt;&gt;&gt; FlyVec.load(force_redownload=True)</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Citation">Citation<a class="anchor-link" href="#Citation"> </a></h1><p>If you use this in your work, please cite:</p>
 
-<pre><code>@article{liang2021can,
+<pre><code>@article{liang2021flyvec,
   title={Can a Fruit Fly Learn Word Embeddings?},
   author={Liang, Yuchen and Ryali, Chaitanya K and Hoover, Benjamin and Grinberg, Leopold and Navlakha, Saket and Zaki, Mohammed J and Krotov, Dmitry},
   journal={arXiv preprint arXiv:2101.06887},
