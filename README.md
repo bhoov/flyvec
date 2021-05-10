@@ -131,7 +131,7 @@ model.dictionary;
 
 ## Simple word embeddings
 
-Only care about the sparse, context independent word embeddings for our small vocabulary? Just run:
+Only care about the sparse, context independent word embeddings for our small vocabulary? Get precomputed word vectors at `hash_length=51` below:
 
 ```
 wget https://raw.githubusercontent.com/bhoov/flyvec/master/simple-flyvec-embeddings.json
