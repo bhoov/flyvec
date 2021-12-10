@@ -8,7 +8,8 @@ This is a wrapper around the original code that was used to train FlyVec. Origin
 You need a python environment with `numpy` installed, a system that supports CUDA, `nvcc`, and `g++`.
 
 **Building the Source Files**
-`make`
+
+`bash src/short_make`
 
 Note that you will see some warnings. This is expected.
 
