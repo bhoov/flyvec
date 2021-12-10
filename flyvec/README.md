@@ -13,7 +13,7 @@ You need a python environment with `numpy` installed, a system that supports CUD
 Note that you will see some warnings. This is expected.
 
 **Training**
-`python train.py path/to/encodings.npy path/to/offsets.npy -o save/checkpoints/in/this/directory`
+`python train_flyvec.py path/to/encodings.npy path/to/offsets.npy -o save/checkpoints/in/this/directory`
 
 **Description of Inputs**
 - `encodings.npy` -- An `np.int32` array representing the tokenized vocabulary-IDs of the input corpus, of shape `(N,)` where `N` is the number of tokens in the corpus
@@ -23,4 +23,4 @@ Note that you will see some warnings. This is expected.
 **Description of Outputs**
 - `model_X.npy` -- Stores checkpoints after every epoch within the specified output directory
 
-See `python train.py --help` for more options.
+See `python train_flyvec.py --help` for more options.
